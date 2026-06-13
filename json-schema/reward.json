@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/giftbit/main/json-schema/reward.json",
+  "title": "Reward",
+  "description": "A digital gift card or prepaid reward issued through the Giftbit platform.",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "description": "Giftbit-generated unique identifier for the reward."
+    },
+    "campaign_uuid": {
+      "type": "string",
+      "description": "Giftbit-generated unique identifier for the parent order."
+    },
+    "campaign_id": {
+      "type": "string",
+      "description": "Client-supplied identifier for the parent order."
+    },
+    "delivery_status": {
+      "type": "string",
+      "description": "Email delivery status of the reward.",
+      "enum": [
+        "UNSENT",
+        "DELIVERED",
+        "UNDELIVERABLE",
+        "TEMPORARILY_UNDELIVERABLE",
+        "UNSUBSCRIBED",
+        "COMPLAINT"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Redemption status of the reward offer.",
+      "enum": [
+        "SENT_AND_REDEEMABLE",
+        "REDEEMED",
+        "TO_CHARITY",
+        "GIVER_CANCELLED",
+        "EXPIRED"
+      ]
+    },
+    "management_dashboard_link": {
+      "type": "string",
+      "format": "uri",
+      "description": "URL for viewing this reward in the Giftbit account dashboard."
+    },
+    "redelivery_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of times the reward was resent to the recipient."
+    },
+    "price_in_cents": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Value of the reward in cents."
+    },
+    "brand_code": {
+      "type": "string",
+      "description": "Unique brand identifier. May be absent if recipient has not yet chosen from a multi-brand order."
+    },
+    "recipient_email": {
+      "type": "string",
+      "format": "email",
+      "description": "Email address of the reward recipient."
+    },
+    "recipient_name": {
+      "type": "string",
+      "description": "Name of the reward recipient."
+    },
+    "created_date": {
+      "type": "string",
+      "description": "Date and time reward was created in Pacific Standard Time. Format: yyyy-MM-dd HH:mm:ss."
+    },
+    "delivery_date": {
+      "type": "string",
+      "description": "Date and time reward was delivered. Format: yyyy-MM-dd HH:mm:ss."
+    }
+  },
+  "required": ["uuid", "campaign_uuid", "delivery_status", "status"]
+}

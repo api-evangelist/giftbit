@@ -1,0 +1,23 @@
+{
+  "gift": {
+    "uuid": "d30be501ed2546e580c5c9eaf56633d9",
+    "campaign_uuid": "8f5835dfb637413793c5d55f8ea95e23",
+    "delivery_status": "DELIVERED",
+    "status": "SENT_AND_REDEEMABLE",
+    "management_dashboard_link": "http://testbedapp.giftbit.com/campaign/campaignInfo?uuid=8f5835dfb637413793c5d55f8ea95e23&gift_uuid=d30be501ed2546e580c5c9eaf56633d9",
+    "redelivery_count": 0,
+    "campaign_id": "order-abc123",
+    "price_in_cents": 2500,
+    "brand_code": "itunesus",
+    "recipient_email": "pjohnson@giftbit.com",
+    "recipient_name": "Perry Johnson",
+    "created_date": "2016-05-11 12:18:25",
+    "delivery_date": "2016-05-11 12:18:32"
+  },
+  "info": {
+    "code": "INFO_GIFTS",
+    "name": "Gift information retrieved",
+    "message": "Returned gifts matching your search parameters."
+  },
+  "status": 200
+}

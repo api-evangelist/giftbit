@@ -39,7 +39,7 @@ apis:
       - type: Documentation
         url: https://www.giftbit.com/giftbitapi/
       - type: OpenAPI
-        url: https://github.com/Giftbit/Giftbit-API-Docs/blob/master/apiary.apib
+        url: https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/openapi/giftbit-openapi.yml
       - type: Sandbox
         url: https://testbed.giftbit.com
 common:

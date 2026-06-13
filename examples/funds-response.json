@@ -1,0 +1,25 @@
+{
+  "info": {
+    "code": "INFO_FUNDS",
+    "name": "Fund information retrieved",
+    "message": "Your current fund information was retrieved."
+  },
+  "fundsbycurrency": {
+    "USD": {
+      "available_in_cents": 196525,
+      "pending_in_cents": 0,
+      "reserved_in_cents": 41500
+    },
+    "CAD": {
+      "available_in_cents": 6600,
+      "pending_in_cents": 0,
+      "reserved_in_cents": 1000
+    },
+    "PRO": {
+      "available_in_cents": 0,
+      "pending_in_cents": 0,
+      "reserved_in_cents": 0
+    }
+  },
+  "status": 200
+}

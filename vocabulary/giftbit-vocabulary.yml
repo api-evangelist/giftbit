@@ -1,0 +1,101 @@
+vocabulary:
+  title: Giftbit API Vocabulary
+  description: >
+    Domain terms used in the Giftbit digital rewards and gift card platform API.
+  terms:
+    - term: reward
+      definition: >
+        A digital gift card or prepaid offer issued to a recipient through
+        the Giftbit platform. Also referred to as a "gift" in API responses.
+      aliases:
+        - gift
+    - term: campaign
+      definition: >
+        A reward order placed through the Giftbit API. A single campaign can
+        produce multiple individual rewards (one per contact, or one per link
+        when using shortlinks/direct links). Also called an "order."
+      aliases:
+        - order
+    - term: brand_code
+      definition: >
+        A unique string identifier for a specific reward brand in the Giftbit
+        marketplace (e.g., "itunesus" for Apple iTunes US, "amazonus" for
+        Amazon US). Used to specify which gift card brand to send.
+    - term: price_in_cents
+      definition: >
+        The face value of a reward expressed in the smallest currency unit
+        (cents). A value of 2500 represents $25.00 USD.
+    - term: contact
+      definition: >
+        A reward recipient specified in an email order. Contains at minimum
+        an email address, with optional first and last name.
+    - term: delivery_status
+      definition: >
+        Tracks whether the reward email was successfully delivered to the
+        recipient's inbox. Possible values: UNSENT, DELIVERED, UNDELIVERABLE,
+        TEMPORARILY_UNDELIVERABLE, UNSUBSCRIBED, COMPLAINT.
+    - term: status
+      definition: >
+        Tracks the redemption lifecycle of the reward offer. Possible values:
+        SENT_AND_REDEEMABLE, REDEEMED, TO_CHARITY, GIVER_CANCELLED, EXPIRED.
+    - term: full_catalog
+      definition: >
+        A reward type where recipients can choose from the complete Giftbit
+        brand marketplace within a specified region, rather than being limited
+        to specific brand_codes selected by the sender.
+    - term: region
+      definition: >
+        A geographic area used to scope full-catalog reward orders to brands
+        available in a particular market (e.g., "Canada", "United States").
+    - term: gift_template
+      definition: >
+        A template id configured in the Giftbit web interface that pre-sets
+        reward email content (subject, message, branding). Optional when
+        subject and message are provided directly in the API call.
+    - term: expiry
+      definition: >
+        A date (YYYY-MM-dd) after which unclaimed reward offers expire and
+        credits are returned to the sender's account. Maximum one year from
+        order creation.
+    - term: uuid
+      definition: >
+        A Giftbit-generated universally unique identifier for a reward or
+        campaign. Distinct from the client-supplied "id" field.
+    - term: id
+      definition: >
+        A client-supplied unique identifier for orders and funding events.
+        Used for idempotency — safely re-submitting the same request on
+        unexpected errors will not create duplicate orders.
+    - term: gift_link
+      definition: >
+        A URL returned from the /embedded endpoint that the sender embeds
+        directly in their app or website. Recipients access their reward
+        immediately without additional claim steps.
+    - term: embeddable
+      definition: >
+        A flag on a brand indicating it supports the in-app embedded rewards
+        delivery flow via the /embedded endpoint.
+    - term: available_in_cents
+      definition: >
+        The current purchasing power in the Giftbit account available for
+        placing new reward orders. Part of the funds balance response.
+    - term: reserved_in_cents
+      definition: >
+        Funds held to cover the cost of outstanding reward offers that have
+        been sent but not yet claimed and are still within their expiry date.
+    - term: pending_in_cents
+      definition: >
+        Funds that have been submitted (e.g., via check or wire transfer)
+        but have not yet fully cleared and become available.
+    - term: redelivery_count
+      definition: >
+        The number of times a reward email has been resent to the recipient
+        via the PUT /gifts/{uuid} endpoint.
+    - term: shortlink
+      definition: >
+        A shortened URL delivering a reward offer, suitable for SMS, social
+        media, or other contexts where a compact link is preferred.
+    - term: direct_link
+      definition: >
+        A full-length URL delivering a reward offer, intended for embedding
+        in emails or applications where URL length is not a concern.

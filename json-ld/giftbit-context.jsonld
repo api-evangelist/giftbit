@@ -1,0 +1,181 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "giftbit": "https://www.giftbit.com/vocab#",
+
+    "Reward": "giftbit:Reward",
+    "Campaign": "giftbit:Campaign",
+    "Contact": "giftbit:Contact",
+    "Brand": "giftbit:Brand",
+    "FundsBalance": "giftbit:FundsBalance",
+
+    "uuid": {
+      "@id": "giftbit:uuid",
+      "@type": "xsd:string"
+    },
+    "campaign_uuid": {
+      "@id": "giftbit:campaignUuid",
+      "@type": "xsd:string"
+    },
+    "campaign_id": {
+      "@id": "giftbit:campaignId",
+      "@type": "xsd:string"
+    },
+    "id": {
+      "@id": "giftbit:clientId",
+      "@type": "xsd:string"
+    },
+    "price_in_cents": {
+      "@id": "giftbit:priceInCents",
+      "@type": "xsd:integer"
+    },
+    "brand_code": {
+      "@id": "giftbit:brandCode",
+      "@type": "xsd:string"
+    },
+    "brand_codes": {
+      "@id": "giftbit:brandCodes",
+      "@container": "@list"
+    },
+    "region": {
+      "@id": "giftbit:region",
+      "@type": "xsd:string"
+    },
+    "expiry": {
+      "@id": "giftbit:expiry",
+      "@type": "xsd:date"
+    },
+    "delivery_status": {
+      "@id": "giftbit:deliveryStatus",
+      "@type": "xsd:string"
+    },
+    "status": {
+      "@id": "giftbit:status",
+      "@type": "xsd:string"
+    },
+    "redelivery_count": {
+      "@id": "giftbit:redeliveryCount",
+      "@type": "xsd:integer"
+    },
+    "management_dashboard_link": {
+      "@id": "giftbit:managementDashboardLink",
+      "@type": "@id"
+    },
+    "gift_link": {
+      "@id": "giftbit:giftLink",
+      "@type": "@id"
+    },
+    "gift_template": {
+      "@id": "giftbit:giftTemplate",
+      "@type": "xsd:string"
+    },
+    "recipient_email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "recipient_name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "created_date": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:string"
+    },
+    "delivery_date": {
+      "@id": "giftbit:deliveryDate",
+      "@type": "xsd:string"
+    },
+    "contacts": {
+      "@id": "giftbit:contacts",
+      "@type": "giftbit:Contact",
+      "@container": "@set"
+    },
+    "email": {
+      "@id": "schema:email",
+      "@type": "xsd:string"
+    },
+    "firstname": {
+      "@id": "schema:givenName",
+      "@type": "xsd:string"
+    },
+    "lastname": {
+      "@id": "schema:familyName",
+      "@type": "xsd:string"
+    },
+    "available_in_cents": {
+      "@id": "giftbit:availableInCents",
+      "@type": "xsd:integer"
+    },
+    "pending_in_cents": {
+      "@id": "giftbit:pendingInCents",
+      "@type": "xsd:integer"
+    },
+    "reserved_in_cents": {
+      "@id": "giftbit:reservedInCents",
+      "@type": "xsd:integer"
+    },
+    "fundsbycurrency": {
+      "@id": "giftbit:fundsByCurrency"
+    },
+    "currencyisocode": {
+      "@id": "schema:currency",
+      "@type": "xsd:string"
+    },
+    "fund_amount_in_cents": {
+      "@id": "giftbit:fundAmountInCents",
+      "@type": "xsd:integer"
+    },
+    "embeddable": {
+      "@id": "giftbit:embeddable",
+      "@type": "xsd:boolean"
+    },
+    "name": {
+      "@id": "schema:name",
+      "@type": "xsd:string"
+    },
+    "description": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "image_url": {
+      "@id": "schema:image",
+      "@type": "@id"
+    },
+    "min_price_in_cents": {
+      "@id": "giftbit:minPriceInCents",
+      "@type": "xsd:integer"
+    },
+    "max_price_in_cents": {
+      "@id": "giftbit:maxPriceInCents",
+      "@type": "xsd:integer"
+    },
+    "info": {
+      "@id": "giftbit:info"
+    },
+    "code": {
+      "@id": "giftbit:code",
+      "@type": "xsd:string"
+    },
+    "message": {
+      "@id": "schema:description",
+      "@type": "xsd:string"
+    },
+    "fees": {
+      "@id": "giftbit:fees"
+    },
+    "total_in_cents": {
+      "@id": "giftbit:totalInCents",
+      "@type": "xsd:integer"
+    },
+    "subtotal_in_cents": {
+      "@id": "giftbit:subtotalInCents",
+      "@type": "xsd:integer"
+    },
+    "tax_in_cents": {
+      "@id": "giftbit:taxInCents",
+      "@type": "xsd:integer"
+    }
+  }
+}

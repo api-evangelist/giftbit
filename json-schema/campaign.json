@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/giftbit/main/json-schema/campaign.json",
+  "title": "Campaign",
+  "description": "A Giftbit reward order (campaign), which can produce one or more individual rewards delivered by email, shortlink, direct link, or in-app embed.",
+  "type": "object",
+  "properties": {
+    "uuid": {
+      "type": "string",
+      "description": "Giftbit-generated unique order identifier."
+    },
+    "id": {
+      "type": "string",
+      "description": "Client-supplied unique order identifier used for idempotency."
+    },
+    "price_in_cents": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Value of each reward in the order in cents."
+    },
+    "brand_code": {
+      "type": "string",
+      "description": "Brand code for single-brand orders."
+    },
+    "brand_codes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "List of brand codes for multi-brand choice orders."
+    },
+    "region": {
+      "type": "string",
+      "description": "Geographic region for full-catalog reward orders."
+    },
+    "expiry": {
+      "type": "string",
+      "format": "date",
+      "description": "Claim-before date after which unclaimed rewards expire."
+    },
+    "fees": {
+      "type": "object",
+      "description": "Cost breakdown for this order.",
+      "properties": {
+        "cost_entries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "percentage": { "type": "number" },
+              "fee_type": { "type": "string" },
+              "amount_in_cents": { "type": "integer" },
+              "currency": { "type": "string" },
+              "tax_type": { "type": "string" },
+              "tax_in_cents": { "type": "integer" },
+              "number_of_gifts": { "type": "integer" },
+              "fee_per_gift_in_cents": { "type": "integer" }
+            }
+          }
+        },
+        "subtotal_in_cents": { "type": "integer" },
+        "tax_in_cents": { "type": "integer" },
+        "tax_type": { "type": "string" },
+        "total_in_cents": { "type": "integer" }
+      }
+    }
+  },
+  "required": ["id", "price_in_cents"]
+}
