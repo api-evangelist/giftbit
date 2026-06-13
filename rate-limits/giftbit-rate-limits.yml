@@ -1,0 +1,32 @@
+name: Giftbit API Rate Limits
+description: Rate limiting policies for the Giftbit REST API.
+url: https://www.giftbit.com/giftbitapi/
+model: adaptive
+details: >
+  The Giftbit API uses adaptive rate limiting that allows burstiness. No fixed
+  numeric limits (requests per second or per minute) are publicly documented.
+  Exceeding the adaptive threshold returns HTTP 429 Too Many Requests.
+policies:
+  - name: Adaptive Rate Limiting
+    description: >
+      Rate limits are enforced adaptively, meaning burst traffic is permitted
+      within reason. The API returns HTTP 429 when the adaptive threshold is
+      exceeded.
+    http_status_on_breach: 429
+    retry_strategy: exponential backoff
+    testing:
+      header: SIMULATE-RATELIMIT
+      value: "true"
+      description: >
+        Include the SIMULATE-RATELIMIT header set to true in a request to
+        trigger a simulated 429 response for testing retry logic.
+idempotency:
+  description: >
+    POST requests accept a client-supplied id parameter to make operations
+    idempotent. Resending the same id will not duplicate orders, which is
+    useful for safe retries after network errors.
+  parameter: id
+uptime_sla:
+  target: 99.95%
+  actual: approximately 99.99%
+  status_page: https://status.giftbit.com/

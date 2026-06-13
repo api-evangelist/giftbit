@@ -1,0 +1,70 @@
+aid: giftbit
+name: Giftbit
+description: >
+  Giftbit is a gift card and digital reward platform with a REST API for
+  distributing digital gift cards, managing reward campaigns, tracking
+  redemptions, and accessing a marketplace of 1,500+ brand integrations across
+  40+ countries. The API enables businesses to send single-brand or multi-brand
+  rewards via email delivery, shortlinks, direct links, or in-app embeds, with
+  no platform subscription fees — paying only the face value of rewards sent.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/apis.yml
+created: '2026-06-13'
+modified: '2026-06-13'
+specificationVersion: '0.19'
+tags:
+  - Gift Cards
+  - Digital Rewards
+  - Incentives
+  - Payments
+  - Reward Distribution
+  - Prepaid Cards
+apis:
+  - aid: giftbit:giftbit-api
+    name: Giftbit API
+    description: >
+      RESTful API for distributing digital gift cards and prepaid cards,
+      managing reward campaigns, retrieving brand catalogs, and tracking
+      individual gift redemption status. Supports email delivery, shortlinks,
+      direct links, and in-app embedded reward flows.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.giftbit.com/gift-card-api
+    baseURL: https://api.giftbit.com/papi/v1
+    tags:
+      - Gift Cards
+      - Rewards
+      - Campaigns
+      - Redemptions
+    properties:
+      - type: Documentation
+        url: https://www.giftbit.com/giftbitapi/
+      - type: OpenAPI
+        url: https://github.com/Giftbit/Giftbit-API-Docs/blob/master/apiary.apib
+      - type: Sandbox
+        url: https://testbed.giftbit.com
+common:
+  - type: Website
+    url: https://www.giftbit.com
+  - type: Documentation
+    url: https://www.giftbit.com/api-documentation
+  - type: GitHubOrg
+    url: https://github.com/Giftbit
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/giftbit
+  - type: Blog
+    url: https://www.giftbit.com/blog
+  - type: Pricing
+    url: https://www.giftbit.com/pricing
+  - type: StatusPage
+    url: https://status.giftbit.com/
+  - type: X
+    url: https://x.com/giftbit
+  - type: Plans
+    url: plans/giftbit-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/giftbit-rate-limits.yml
+  - type: FinOps
+    url: finops/giftbit-finops.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com

@@ -1,0 +1,47 @@
+name: Giftbit FinOps
+description: Financial operations guidance for managing costs on the Giftbit platform and API.
+url: https://www.giftbit.com/pricing
+cost_model: consumption-based
+notes: >
+  Giftbit charges no platform or subscription fees. All costs are tied directly
+  to the rewards distributed and the funding method used. This makes cost
+  forecasting straightforward: project spend equals the total face value of
+  rewards sent plus any applicable card or processing fees.
+cost_drivers:
+  - driver: Face value of digital gift cards sent
+    type: variable
+    mitigation: Use the sandbox (testbed) environment for all development and QA testing; sandbox rewards are non-redeemable and do not incur charges.
+  - driver: Credit card funding fee (2.9%)
+    type: variable
+    mitigation: Fund via bank wire, ACH, EFT, or direct debit to eliminate the 2.9% funding fee.
+  - driver: Physical prepaid card fees ($1–$4.95 per card)
+    type: variable
+    mitigation: Prefer digital delivery where possible; physical cards carry per-card fees.
+savings_opportunities:
+  - name: Breakage recapture
+    description: >
+      Earn back 25% (default rate) of the face value of promotional rewards
+      that are never claimed by recipients when a claim-by date is set.
+    action: Set claim-by dates on promotional campaigns to activate breakage recapture.
+  - name: Revenue sharing
+    description: >
+      High-volume programs may qualify for margin sharing from Giftbit's brand
+      partnerships, effectively reducing the net cost per reward.
+    action: Contact Giftbit to discuss volume thresholds and revenue sharing eligibility.
+  - name: Volume discounts
+    description: Custom pricing is available for high-volume reward programs.
+    action: Negotiate custom pricing with Giftbit for large or recurring programs.
+  - name: Free currency conversion
+    description: Giftbit does not charge fees for currency conversion, making global programs cost-neutral on FX.
+    action: Use multi-currency catalogs without concern for conversion markup.
+monitoring:
+  - tool: Giftbit dashboard tracking and reporting
+    url: https://app.giftbit.com/login/auth
+    description: Monitor gift send volume, redemption rates, and breakage from the platform dashboard.
+  - tool: /gifts endpoint
+    description: Query individual reward records and redemption status programmatically for cost attribution and reconciliation.
+  - tool: /campaign/{id} endpoint
+    description: Retrieve campaign-level spend and delivery status for budget tracking.
+compliance:
+  - SOC 2 certified
+  - KYB (Know Your Business) review required for new production accounts

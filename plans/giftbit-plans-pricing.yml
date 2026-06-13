@@ -1,0 +1,45 @@
+name: Giftbit Plans and Pricing
+description: Pricing model for the Giftbit gift card and digital reward platform API.
+url: https://www.giftbit.com/pricing
+plans:
+  - name: Pay-As-You-Go
+    description: No subscription fees, minimums, or exclusivity contracts. Pay only the face value of rewards sent plus applicable processing fees.
+    price: 0
+    unit: platform fee
+    features:
+      - Full platform and API access
+      - Team accounts
+      - Tracking and reporting
+      - Customer success support
+      - 1500+ brand catalog across 40+ countries
+      - SOC 2 compliant environment
+      - Sandbox / testbed environment
+    costs:
+      - item: Digital gift cards
+        cost: Face value only (no markup)
+      - item: Credit card funding fee
+        cost: 2.9% of total funded amount
+      - item: Bank wire / ACH / EFT / Direct Debit
+        cost: Free
+      - item: Currency conversion
+        cost: Free
+      - item: USD Physical Visa (6-month expiry)
+        cost: $2.95 per card
+      - item: USD Physical Visa (12-month expiry)
+        cost: $4.95 per card
+      - item: GBP Mastercard
+        cost: £1.00 per card
+      - item: AUD Visa
+        cost: $2.00 AUD per card
+    revenue_opportunities:
+      - item: Breakage recapture on unclaimed promotional rewards
+        rate: 25% default
+      - item: Revenue sharing for high-volume programs
+        rate: Custom margin sharing from brand partnerships
+      - item: Volume discounts
+        rate: Custom pricing for high-volume senders
+notes: >
+  Giftbit does not charge platform, subscription, or seat fees. All pricing
+  is consumption-based on the face value of rewards distributed. Volume
+  discounts and revenue sharing arrangements are available for qualifying
+  high-volume programs.
