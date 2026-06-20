@@ -7,7 +7,7 @@ description: >
   40+ countries. The API enables businesses to send single-brand or multi-brand
   rewards via email delivery, shortlinks, direct links, or in-app embeds, with
   no platform subscription fees — paying only the face value of rewards sent.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -27,7 +27,7 @@ apis:
       managing reward campaigns, retrieving brand catalogs, and tracking
       individual gift redemption status. Supports email delivery, shortlinks,
       direct links, and in-app embedded reward flows.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.giftbit.com/gift-card-api
     baseURL: https://api.giftbit.com/papi/v1
     tags:
