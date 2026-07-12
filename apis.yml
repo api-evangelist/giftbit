@@ -43,6 +43,14 @@ apis:
       - type: Sandbox
         url: https://testbed.giftbit.com
 common:
+  - type: TrustCenter
+    url: security/giftbit-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/giftbit-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/giftbit-domain-security.yml
+  - type: Authentication
+    url: authentication/giftbit-authentication.yml
   - type: Website
     url: https://www.giftbit.com
   - type: Documentation

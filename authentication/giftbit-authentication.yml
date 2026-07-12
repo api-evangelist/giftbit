@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/giftbit-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  description: Authenticate by sending your API token prefixed with "Bearer " in the Authorization
+    HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+  sources:
+  - openapi/giftbit-openapi.yml
