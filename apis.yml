@@ -43,6 +43,8 @@ apis:
       - type: Sandbox
         url: https://testbed.giftbit.com
 common:
+  - type: AgenticAccess
+    url: agentic-access/giftbit-agentic-access.yml
   - type: TrustCenter
     url: security/giftbit-trust-center.yml
   - type: VulnerabilityDisclosure
