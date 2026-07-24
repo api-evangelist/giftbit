@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  title: Giftbit Brands API
+  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
+
+    '
+  version: 1.0.0
+  contact:
+    email: sales@giftbit.com
+  termsOfService: https://www.giftbit.com
+servers:
+- url: https://api.giftbit.com/papi/v1
+  description: Production API
+- url: https://api-testbed.giftbit.com/papi/v1
+  description: Testbed (Sandbox) API
+security:
+- BearerAuth: []
+tags:
+- name: Brands
+  description: Browse available reward brands and catalogs
+paths:
+  /brands:
+    get:
+      operationId: listBrands
+      summary: List brands
+      description: 'Returns a paginated list of available reward brands. Filter by region, price range, currency, and whether brands are embeddable.
+
+        '
+      tags:
+      - Brands
+      parameters:
+      - name: region
+        in: query
+        description: Filter brands by geographic region.
+        schema:
+          type: string
+      - name: max_price_in_cents
+        in: query
+        description: Maximum reward price in cents.
+        schema:
+          type: integer
+      - name: min_price_in_cents
+        in: query
+        description: Minimum reward price in cents.
+        schema:
+          type: integer
+      - name: currencyisocode
+        in: query
+        description: ISO currency code (e.g. USD, CAD).
+        schema:
+          type: string
+      - name: search
+        in: query
+        description: Search string to filter brands by name.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of brands to return. Default 20.
+        schema:
+          type: integer
+          default: 20
+      - name: offset
+        in: query
+        description: Offset into the result set.
+        schema:
+          type: integer
+          default: 0
+      - name: embeddable
+        in: query
+        description: Filter to brands that support embedded rewards.
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of brands
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /brands/{brand_code}:
+    get:
+      operationId: retrieveBrand
+      summary: Retrieve brand
+      description: Returns details for a single reward brand by its brand code.
+      tags:
+      - Brands
+      parameters:
+      - name: brand_code
+        in: path
+        required: true
+        description: The unique code identifying the brand (e.g. itunesus, amazonus).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Brand details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BrandResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    BrandsResponse:
+      type: object
+      properties:
+        brands:
+          type: array
+          items:
+            $ref: '#/components/schemas/Brand'
+        number_of_results:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total_count:
+          type: integer
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    Brand:
+      type: object
+      properties:
+        brand_code:
+          type: string
+          description: Unique brand identifier (e.g. itunesus, amazonus).
+        name:
+          type: string
+          description: Brand display name.
+        description:
+          type: string
+          description: Brand description.
+        currencyisocode:
+          type: string
+          description: Currency for this brand.
+        min_price_in_cents:
+          type: integer
+          description: Minimum reward value in cents.
+        max_price_in_cents:
+          type: integer
+          description: Maximum reward value in cents.
+        image_url:
+          type: string
+          description: URL of the brand logo/image.
+        embeddable:
+          type: boolean
+          description: Whether this brand supports embedded rewards.
+    BrandResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate by sending your API token prefixed with "Bearer " in the Authorization HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+
+        '

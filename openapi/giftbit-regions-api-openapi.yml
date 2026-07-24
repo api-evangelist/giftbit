@@ -1,0 +1,96 @@
+openapi: 3.0.3
+info:
+  title: Giftbit Brands Regions API
+  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
+
+    '
+  version: 1.0.0
+  contact:
+    email: sales@giftbit.com
+  termsOfService: https://www.giftbit.com
+servers:
+- url: https://api.giftbit.com/papi/v1
+  description: Production API
+- url: https://api-testbed.giftbit.com/papi/v1
+  description: Testbed (Sandbox) API
+security:
+- BearerAuth: []
+tags:
+- name: Regions
+  description: List supported geographical regions
+paths:
+  /regions:
+    get:
+      operationId: listRegions
+      summary: List regions
+      description: Returns the list of supported geographic regions for full-catalog rewards.
+      tags:
+      - Regions
+      responses:
+        '200':
+          description: List of regions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RegionsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    RegionsResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            type: string
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+  responses:
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate by sending your API token prefixed with "Bearer " in the Authorization HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+
+        '

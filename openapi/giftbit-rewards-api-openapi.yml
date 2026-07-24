@@ -1,0 +1,412 @@
+openapi: 3.0.3
+info:
+  title: Giftbit Brands Rewards API
+  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
+
+    '
+  version: 1.0.0
+  contact:
+    email: sales@giftbit.com
+  termsOfService: https://www.giftbit.com
+servers:
+- url: https://api.giftbit.com/papi/v1
+  description: Production API
+- url: https://api-testbed.giftbit.com/papi/v1
+  description: Testbed (Sandbox) API
+security:
+- BearerAuth: []
+tags:
+- name: Rewards
+  description: List, retrieve, resend, or cancel individual rewards
+paths:
+  /gifts:
+    get:
+      operationId: listRewards
+      summary: List rewards
+      description: 'Returns a paginated, filterable list of rewards across all orders. Supports filtering by delivery status, redemption status, date ranges, recipient name/email, and price range.
+
+        '
+      tags:
+      - Rewards
+      parameters:
+      - name: uuid
+        in: query
+        description: Return the reward with matching uuid.
+        schema:
+          type: string
+      - name: campaign_uuid
+        in: query
+        description: Filter rewards by the order with the matching Giftbit UUID.
+        schema:
+          type: string
+      - name: campaign_id
+        in: query
+        description: Filter rewards by the client-supplied order id.
+        schema:
+          type: string
+      - name: price_in_cents_greater_than
+        in: query
+        description: Filter rewards with price greater than this value in cents.
+        schema:
+          type: integer
+      - name: price_in_cents_less_than
+        in: query
+        description: Filter rewards with price less than this value in cents.
+        schema:
+          type: integer
+      - name: recipient_name
+        in: query
+        description: Filter by recipient name (minimum 3 characters).
+        schema:
+          type: string
+      - name: recipient_email
+        in: query
+        description: Filter by recipient email (minimum 3 characters).
+        schema:
+          type: string
+      - name: delivery_status
+        in: query
+        description: 'Filter by delivery status. Options: UNSENT, DELIVERED, UNDELIVERABLE, TEMPORARILY_UNDELIVERABLE, UNSUBSCRIBED, COMPLAINT.
+
+          '
+        schema:
+          type: string
+          enum:
+          - UNSENT
+          - DELIVERED
+          - UNDELIVERABLE
+          - TEMPORARILY_UNDELIVERABLE
+          - UNSUBSCRIBED
+          - COMPLAINT
+      - name: status
+        in: query
+        description: 'Filter by reward status. Options: SENT_AND_REDEEMABLE, REDEEMED, TO_CHARITY, GIVER_CANCELLED, EXPIRED.
+
+          '
+        schema:
+          type: string
+          enum:
+          - SENT_AND_REDEEMABLE
+          - REDEEMED
+          - TO_CHARITY
+          - GIVER_CANCELLED
+          - EXPIRED
+      - name: created_date_greater_than
+        in: query
+        description: Filter by created date. Format yyyy-MM-dd HH:mm:ss.
+        schema:
+          type: string
+      - name: created_date_less_than
+        in: query
+        description: Filter by created date. Format yyyy-MM-dd HH:mm:ss.
+        schema:
+          type: string
+      - name: delivery_date_greater_than
+        in: query
+        description: Filter by delivery date. Format yyyy-MM-dd HH:mm:ss.
+        schema:
+          type: string
+      - name: delivery_date_less_than
+        in: query
+        description: Filter by delivery date. Format yyyy-MM-dd HH:mm:ss.
+        schema:
+          type: string
+      - name: redelivery_count_greater_than
+        in: query
+        description: Filter by redelivery count greater than this value.
+        schema:
+          type: integer
+      - name: redelivery_count_less_than
+        in: query
+        description: Filter by redelivery count less than this value.
+        schema:
+          type: integer
+      - name: redeemed_date_greater_than
+        in: query
+        description: Filter by redeemed date. Format yyyy-MM-dd HH:mm:ss.
+        schema:
+          type: string
+      - name: redeemed_date_less_than
+        in: query
+        description: Filter by redeemed date. Format yyyy-MM-dd HH:mm:ss.
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Maximum number of rewards to return. Default 20.
+        schema:
+          type: integer
+          default: 20
+      - name: offset
+        in: query
+        description: Offset into results. Default 0.
+        schema:
+          type: integer
+          default: 0
+      - name: sort
+        in: query
+        description: 'Sort field. Options: campaign_id, price_in_cents, recipient_name, recipient_email, delivery_status, status.
+
+          '
+        schema:
+          type: string
+          enum:
+          - campaign_id
+          - price_in_cents
+          - recipient_name
+          - recipient_email
+          - delivery_status
+          - status
+      - name: order
+        in: query
+        description: Sort direction. Options asc or desc. Default desc.
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+      responses:
+        '200':
+          description: List of rewards
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardsListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /gifts/{uuid}:
+    get:
+      operationId: retrieveReward
+      summary: Retrieve reward
+      description: Returns the details for a single reward by its Giftbit-generated UUID.
+      tags:
+      - Rewards
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: The Giftbit UUID of the reward (not the order uuid or id).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reward details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: resendReward
+      summary: Resend reward
+      description: 'Resends a reward email to the original recipient. Not available for embedded rewards or already-claimed rewards.
+
+        '
+      tags:
+      - Rewards
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: The Giftbit UUID of the reward.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - resend
+              properties:
+                resend:
+                  type: boolean
+                  description: Must be true to trigger resend.
+                  example: true
+      responses:
+        '200':
+          description: Reward resent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+    delete:
+      operationId: cancelReward
+      summary: Cancel reward
+      description: 'Cancels a reward that has not yet been claimed. Credits for unclaimed rewards are returned to the account. Cannot cancel embedded rewards or already-claimed rewards.
+
+        '
+      tags:
+      - Rewards
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        description: The Giftbit UUID of the reward.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Reward cancelled successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RewardResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    Reward:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Giftbit-generated unique reward identifier.
+        campaign_uuid:
+          type: string
+          description: Giftbit-generated unique identifier of the parent order.
+        delivery_status:
+          type: string
+          description: 'Email delivery status of the reward.
+
+            '
+          enum:
+          - UNSENT
+          - DELIVERED
+          - UNDELIVERABLE
+          - TEMPORARILY_UNDELIVERABLE
+          - UNSUBSCRIBED
+          - COMPLAINT
+        status:
+          type: string
+          description: Redemption status of the reward offer.
+          enum:
+          - SENT_AND_REDEEMABLE
+          - REDEEMED
+          - TO_CHARITY
+          - GIVER_CANCELLED
+          - EXPIRED
+        management_dashboard_link:
+          type: string
+          description: URL for viewing this reward in the Giftbit account dashboard.
+        redelivery_count:
+          type: integer
+          description: Number of times the reward was resent.
+        campaign_id:
+          type: string
+          description: Client-supplied order identifier.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_code:
+          type: string
+          description: Brand of the reward. May be unset for multi-brand unclaimed rewards.
+        recipient_email:
+          type: string
+          description: Recipient email address.
+        recipient_name:
+          type: string
+          description: Recipient name.
+        created_date:
+          type: string
+          description: Date reward was created (Pacific Standard Time). Format yyyy-MM-dd HH:mm:ss.
+        delivery_date:
+          type: string
+          description: Date reward was delivered. Format yyyy-MM-dd HH:mm:ss.
+    RewardsListResponse:
+      type: object
+      properties:
+        gifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reward'
+        number_of_results:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total_count:
+          type: integer
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    RewardResponse:
+      type: object
+      properties:
+        gift:
+          $ref: '#/components/schemas/Reward'
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate by sending your API token prefixed with "Bearer " in the Authorization HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+
+        '

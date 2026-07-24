@@ -1,0 +1,197 @@
+openapi: 3.0.3
+info:
+  title: Giftbit Brands Embedded Rewards API
+  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
+
+    '
+  version: 1.0.0
+  contact:
+    email: sales@giftbit.com
+  termsOfService: https://www.giftbit.com
+servers:
+- url: https://api.giftbit.com/papi/v1
+  description: Production API
+- url: https://api-testbed.giftbit.com/papi/v1
+  description: Testbed (Sandbox) API
+security:
+- BearerAuth: []
+tags:
+- name: Embedded Rewards
+  description: Create in-app embedded reward orders
+paths:
+  /embedded:
+    post:
+      operationId: createEmbeddedReward
+      summary: Create embedded reward
+      description: 'Places a single reward order for immediate in-app delivery. Returns a `gift_link` URL for embedding in your app. Recipients are automatically directed to the card without additional claim steps. Embedded rewards cannot be cancelled or resent.
+
+        '
+      tags:
+      - Embedded Rewards
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmbeddedRewardRequest'
+            example:
+              brand_code: itunesus
+              price_in_cents: 2500
+              id: myGift12345
+      responses:
+        '200':
+          description: Embedded reward created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddedRewardResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+components:
+  schemas:
+    EmbeddedRewardResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        gift_link:
+          type: string
+          description: URL for embedding the reward in-app.
+        status:
+          type: integer
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    Fees:
+      type: object
+      properties:
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
+          type: integer
+        tax_in_cents:
+          type: integer
+        tax_type:
+          type: string
+        total_in_cents:
+          type: integer
+    Campaign:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Giftbit-generated unique order identifier.
+        id:
+          type: string
+          description: Client-supplied order identifier.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_code:
+          type: string
+          description: Brand code (single-brand orders).
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: Brand codes (multi-brand orders).
+        fees:
+          $ref: '#/components/schemas/Fees'
+    CreateEmbeddedRewardRequest:
+      type: object
+      required:
+      - price_in_cents
+      - brand_code
+      - id
+      properties:
+        price_in_cents:
+          type: integer
+          description: Reward value in cents (e.g. 2500 = $25.00).
+        brand_code:
+          type: string
+          description: Single brand code for the embedded reward.
+        id:
+          type: string
+          description: Client-supplied unique order identifier.
+    FeeEntry:
+      type: object
+      properties:
+        percentage:
+          type: number
+          description: Fee as a percentage.
+        fee_type:
+          type: string
+          description: Type of fee (e.g. PREFUND_GIFT_COST, UPFRONT_PER_GIFT_FEE).
+        amount_in_cents:
+          type: integer
+          description: Total fee amount in cents.
+        currency:
+          type: string
+          description: Currency code.
+        tax_type:
+          type: string
+          description: Tax type (e.g. NOTAX).
+        tax_in_cents:
+          type: integer
+          description: Tax amount in cents.
+        number_of_gifts:
+          type: integer
+          description: Number of gifts this fee applies to.
+        fee_per_gift_in_cents:
+          type: integer
+          description: Per-gift fee in cents.
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+  responses:
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate by sending your API token prefixed with "Bearer " in the Authorization HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+
+        '

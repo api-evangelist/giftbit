@@ -1,0 +1,177 @@
+openapi: 3.0.3
+info:
+  title: Giftbit Brands Funds API
+  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
+
+    '
+  version: 1.0.0
+  contact:
+    email: sales@giftbit.com
+  termsOfService: https://www.giftbit.com
+servers:
+- url: https://api.giftbit.com/papi/v1
+  description: Production API
+- url: https://api-testbed.giftbit.com/papi/v1
+  description: Testbed (Sandbox) API
+security:
+- BearerAuth: []
+tags:
+- name: Funds
+  description: Manage account balance and credit card funding
+paths:
+  /funds:
+    get:
+      operationId: retrieveFundingInformation
+      summary: Retrieve funding information
+      description: 'Returns a real-time overview of the account balance broken down by currency (USD, CAD, PRO demo credits), including available, pending, and reserved amounts.
+
+        '
+      tags:
+      - Funds
+      responses:
+        '200':
+          description: Funding information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: addFunds
+      summary: Add funds through credit card
+      description: 'Tops up the account balance using a credit card on file. The credit card must be set up in the web application under Purchase Credits. Use the client-supplied `id` for idempotent retries.
+
+        '
+      tags:
+      - Funds
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddFundsRequest'
+            example:
+              currencyisocode: USD
+              fund_amount_in_cents: 25000
+              id: clientProvidedId_abc123
+      responses:
+        '200':
+          description: Funds added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FundsResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '402':
+          $ref: '#/components/responses/PaymentRequired'
+components:
+  schemas:
+    FundsResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        fundsbycurrency:
+          type: object
+          properties:
+            USD:
+              $ref: '#/components/schemas/CurrencyBalance'
+            CAD:
+              $ref: '#/components/schemas/CurrencyBalance'
+            PRO:
+              $ref: '#/components/schemas/CurrencyBalance'
+        status:
+          type: integer
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    CurrencyBalance:
+      type: object
+      properties:
+        available_in_cents:
+          type: integer
+          description: Available purchasing power in cents.
+        pending_in_cents:
+          type: integer
+          description: Funds sent but not yet fully processed.
+        reserved_in_cents:
+          type: integer
+          description: Funds held to cover outstanding unredeemed reward offers.
+    AddFundsRequest:
+      type: object
+      required:
+      - currencyisocode
+      - fund_amount_in_cents
+      - id
+      properties:
+        currencyisocode:
+          type: string
+          description: Currency to add funds in. Options CAD or USD.
+          enum:
+          - CAD
+          - USD
+        fund_amount_in_cents:
+          type: integer
+          description: Amount to fund in cents. Subject to minimums set in the web app.
+        id:
+          type: string
+          description: Client-supplied unique funding event identifier.
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+  responses:
+    BadRequest:
+      description: The request contained invalid parameters.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    PaymentRequired:
+      description: Credit card transaction failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate by sending your API token prefixed with "Bearer " in the Authorization HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+
+        '

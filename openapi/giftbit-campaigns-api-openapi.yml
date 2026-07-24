@@ -1,0 +1,273 @@
+openapi: 3.0.3
+info:
+  title: Giftbit Brands Campaigns API
+  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
+
+    '
+  version: 1.0.0
+  contact:
+    email: sales@giftbit.com
+  termsOfService: https://www.giftbit.com
+servers:
+- url: https://api.giftbit.com/papi/v1
+  description: Production API
+- url: https://api-testbed.giftbit.com/papi/v1
+  description: Testbed (Sandbox) API
+security:
+- BearerAuth: []
+tags:
+- name: Campaigns
+  description: Create and manage email reward orders
+paths:
+  /campaign:
+    post:
+      operationId: createEmailOrder
+      summary: Create email order
+      description: 'Places an order for one or more emailed rewards. Supports single-brand and full-catalog (multi-brand) reward offers. A client-supplied `id` makes this operation idempotent — resend safely on unexpected errors.
+
+        '
+      tags:
+      - Campaigns
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmailOrderRequest'
+            example:
+              gift_template: XDKHE
+              contacts:
+              - firstname: Perry
+                lastname: Johnson
+                email: pjohnson@giftbit.com
+              price_in_cents: 2500
+              brand_codes:
+              - itunesus
+              - amazonus
+              id: order-abc123
+      responses:
+        '200':
+          description: Order created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+  /campaign/{id}:
+    get:
+      operationId: retrieveOrderById
+      summary: Retrieve order by ID
+      description: Retrieves status and information about a specified reward order.
+      tags:
+      - Campaigns
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: The client-supplied identifier for the order.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Order details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    Fees:
+      type: object
+      properties:
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
+          type: integer
+        tax_in_cents:
+          type: integer
+        tax_type:
+          type: string
+        total_in_cents:
+          type: integer
+    CampaignResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        status:
+          type: integer
+    Campaign:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Giftbit-generated unique order identifier.
+        id:
+          type: string
+          description: Client-supplied order identifier.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_code:
+          type: string
+          description: Brand code (single-brand orders).
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: Brand codes (multi-brand orders).
+        fees:
+          $ref: '#/components/schemas/Fees'
+    Contact:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: Recipient email address.
+          example: pjohnson@giftbit.com
+        firstname:
+          type: string
+          description: Recipient first name.
+          example: Perry
+        lastname:
+          type: string
+          description: Recipient last name.
+          example: Johnson
+    CreateEmailOrderRequest:
+      type: object
+      required:
+      - contacts
+      - price_in_cents
+      - id
+      properties:
+        message:
+          type: string
+          description: Reward email message. Required if no template is supplied.
+        subject:
+          type: string
+          description: Reward email subject. Required if no template is supplied.
+        gift_template:
+          type: string
+          description: Template id from the web account templates section.
+        contacts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+          description: List of recipients.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents (e.g. 2500 = $25.00).
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: List of brand codes to limit choice. Not for full-catalog.
+        region:
+          type: string
+          description: Geographic region for full-catalog rewards.
+        expiry:
+          type: string
+          format: date
+          description: Claim-before date (YYYY-MM-dd). Max one year from creation.
+        id:
+          type: string
+          description: Client-supplied unique order identifier for idempotent requests.
+    FeeEntry:
+      type: object
+      properties:
+        percentage:
+          type: number
+          description: Fee as a percentage.
+        fee_type:
+          type: string
+          description: Type of fee (e.g. PREFUND_GIFT_COST, UPFRONT_PER_GIFT_FEE).
+        amount_in_cents:
+          type: integer
+          description: Total fee amount in cents.
+        currency:
+          type: string
+          description: Currency code.
+        tax_type:
+          type: string
+          description: Tax type (e.g. NOTAX).
+        tax_in_cents:
+          type: integer
+          description: Tax amount in cents.
+        number_of_gifts:
+          type: integer
+          description: Number of gifts this fee applies to.
+        fee_per_gift_in_cents:
+          type: integer
+          description: Per-gift fee in cents.
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: 'Authenticate by sending your API token prefixed with "Bearer " in the Authorization HTTP header. Generate tokens from your Giftbit account under Account -> API keys.
+
+        '
