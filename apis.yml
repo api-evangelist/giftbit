@@ -7,7 +7,20 @@ description: >
   40+ countries. The API enables businesses to send single-brand or multi-brand
   rewards via email delivery, shortlinks, direct links, or in-app embeds, with
   no platform subscription fees — paying only the face value of rewards sent.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/giftbit.png
 url: https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
@@ -20,28 +33,132 @@ tags:
   - Reward Distribution
   - Prepaid Cards
 apis:
-  - aid: giftbit:giftbit-api
-    name: Giftbit API
-    description: >
-      RESTful API for distributing digital gift cards and prepaid cards,
-      managing reward campaigns, retrieving brand catalogs, and tracking
-      individual gift redemption status. Supports email delivery, shortlinks,
-      direct links, and in-app embedded reward flows.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.giftbit.com/gift-card-api
-    baseURL: https://api.giftbit.com/papi/v1
-    tags:
-      - Gift Cards
-      - Rewards
-      - Campaigns
-      - Redemptions
-    properties:
-      - type: Documentation
-        url: https://www.giftbit.com/giftbitapi/
-      - type: OpenAPI
-        url: https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/openapi/giftbit-openapi.yml
-      - type: Sandbox
-        url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-brands-api
+  name: Giftbit Brands API
+  description: Browse available reward brands and catalogs
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Brands
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-brands-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-campaigns-api
+  name: Giftbit Campaigns API
+  description: Create and manage email reward orders
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-direct-links-api
+  name: Giftbit Direct Links API
+  description: Create direct link reward orders
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Direct Links
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-direct-links-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-embedded-rewards-api
+  name: Giftbit Embedded Rewards API
+  description: Create in-app embedded reward orders
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Embedded Rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-embedded-rewards-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-funds-api
+  name: Giftbit Funds API
+  description: Manage account balance and credit card funding
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Funds
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-funds-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-ping-api
+  name: Giftbit Ping API
+  description: Health check and authentication test
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Ping
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-ping-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-regions-api
+  name: Giftbit Regions API
+  description: List supported geographical regions
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Regions
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-regions-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-rewards-api
+  name: Giftbit Rewards API
+  description: List, retrieve, resend, or cancel individual rewards
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Rewards
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-rewards-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
+- aid: giftbit:giftbit-shortlinks-api
+  name: Giftbit Shortlinks API
+  description: Create shortlink reward orders
+  humanURL: https://www.giftbit.com/gift-card-api
+  baseURL: https://api.giftbit.com/papi/v1
+  tags:
+  - Shortlinks
+  properties:
+  - type: OpenAPI
+    url: openapi/giftbit-shortlinks-api-openapi.yml
+  - type: Documentation
+    url: https://www.giftbit.com/giftbitapi/
+  - type: Sandbox
+    url: https://testbed.giftbit.com
 common:
   - type: AgenticAccess
     url: agentic-access/giftbit-agentic-access.yml
