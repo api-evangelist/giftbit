@@ -1,0 +1,30 @@
+{
+  "provider": "giftbit",
+  "sources": [
+    "giftbit-brands-api-openapi.yml",
+    "giftbit-campaigns-api-openapi.yml",
+    "giftbit-direct-links-api-openapi.yml",
+    "giftbit-embedded-rewards-api-openapi.yml",
+    "giftbit-funds-api-openapi.yml",
+    "giftbit-ping-api-openapi.yml",
+    "giftbit-regions-api-openapi.yml",
+    "giftbit-rewards-api-openapi.yml",
+    "giftbit-shortlinks-api-openapi.yml"
+  ],
+  "outputs": [
+    "giftbit-brands-api-openapi.yml",
+    "giftbit-campaigns-api-openapi.yml",
+    "giftbit-direct-links-api-openapi.yml",
+    "giftbit-embedded-rewards-api-openapi.yml",
+    "giftbit-funds-api-openapi.yml",
+    "giftbit-ping-api-openapi.yml",
+    "giftbit-regions-api-openapi.yml",
+    "giftbit-rewards-api-openapi.yml",
+    "giftbit-shortlinks-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
