@@ -24,7 +24,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/giftbit.pn
 url: https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/apis.yml
 created: '2026-06-13'
 modified: '2026-06-13'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
   - Gift Cards
   - Digital Rewards
