@@ -1,0 +1,477 @@
+{
+  "item": [
+    {
+      "id": "19e98189-80c5-4471-9493-27fa7c1cad64",
+      "name": "Brands",
+      "description": {
+        "content": "Browse available reward brands and catalogs",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "efa57dff-15f8-4029-a34e-c25adddf8913",
+          "name": "List brands",
+          "request": {
+            "name": "List brands",
+            "description": {
+              "content": "Returns a paginated list of available reward brands. Filter by region, price range, currency, and whether brands are embeddable.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brands"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "region",
+                  "value": "<string>",
+                  "description": "Filter brands by geographic region."
+                },
+                {
+                  "disabled": false,
+                  "key": "max_price_in_cents",
+                  "value": "<integer>",
+                  "description": "Maximum reward price in cents."
+                },
+                {
+                  "disabled": false,
+                  "key": "min_price_in_cents",
+                  "value": "<integer>",
+                  "description": "Minimum reward price in cents."
+                },
+                {
+                  "disabled": false,
+                  "key": "currencyisocode",
+                  "value": "<string>",
+                  "description": "ISO currency code (e.g. USD, CAD)."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Search string to filter brands by name."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of brands to return. Default 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "Offset into the result set."
+                },
+                {
+                  "disabled": false,
+                  "key": "embeddable",
+                  "value": "<boolean>",
+                  "description": "Filter to brands that support embedded rewards."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1fed111a-3d47-4924-b17f-9dd863c070a5",
+              "name": "List of brands",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_price_in_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_price_in_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "currencyisocode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "embeddable",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"brands\": [\n    {\n      \"brand_code\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"currencyisocode\": \"string\",\n      \"min_price_in_cents\": 6830,\n      \"max_price_in_cents\": 1721,\n      \"image_url\": \"string\",\n      \"embeddable\": false\n    },\n    {\n      \"brand_code\": \"string\",\n      \"name\": \"string\",\n      \"description\": \"string\",\n      \"currencyisocode\": \"string\",\n      \"min_price_in_cents\": 7213,\n      \"max_price_in_cents\": 9827,\n      \"image_url\": \"string\",\n      \"embeddable\": false\n    }\n  ],\n  \"number_of_results\": 7083,\n  \"limit\": 589,\n  \"offset\": 7870,\n  \"total_count\": 4216,\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 3724\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bcfdd1c1-f8cc-4915-ac49-bfcb3d92dd4e",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "region",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "max_price_in_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "min_price_in_cents",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "currencyisocode",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    },
+                    {
+                      "key": "embeddable",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 190\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5b915ee0-126b-4274-8b8e-1f831cc19806",
+          "name": "Retrieve brand",
+          "request": {
+            "name": "Retrieve brand",
+            "description": {
+              "content": "Returns details for a single reward brand by its brand code.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "brands",
+                ":brand_code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "brand_code",
+                  "description": "(Required) The unique code identifying the brand (e.g. itunesus, amazonus)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "182ef33d-783a-4335-bc43-97aaa35fcba5",
+              "name": "Brand details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands",
+                    ":brand_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "brand_code",
+                      "description": "(Required) The unique code identifying the brand (e.g. itunesus, amazonus)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"brand\": {\n    \"brand_code\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"currencyisocode\": \"string\",\n    \"min_price_in_cents\": 7258,\n    \"max_price_in_cents\": 7992,\n    \"image_url\": \"string\",\n    \"embeddable\": true\n  },\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 2930\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5f7ee92-e281-4fdd-be37-9368606f8c0a",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands",
+                    ":brand_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "brand_code",
+                      "description": "(Required) The unique code identifying the brand (e.g. itunesus, amazonus)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 190\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ddf21b04-8b97-4fa5-aad5-911441b8c718",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "brands",
+                    ":brand_code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "brand_code",
+                      "description": "(Required) The unique code identifying the brand (e.g. itunesus, amazonus)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 190\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.giftbit.com/papi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5799abac-e817-43a3-8722-1ab1a63b2bd2",
+    "name": "Giftbit Brands API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.\n\n\nContact Support:\n Email: sales@giftbit.com",
+      "type": "text/plain"
+    }
+  }
+}

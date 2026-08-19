@@ -1,0 +1,242 @@
+{
+  "item": [
+    {
+      "id": "a1ce8c79-3ff0-4c62-8eff-da808a154fbf",
+      "name": "Embedded Rewards",
+      "description": {
+        "content": "Create in-app embedded reward orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f00f34ab-671d-4475-a084-a88f567d03bb",
+          "name": "Create embedded reward",
+          "request": {
+            "name": "Create embedded reward",
+            "description": {
+              "content": "Places a single reward order for immediate in-app delivery. Returns a `gift_link` URL for embedding in your app. Recipients are automatically directed to the card without additional claim steps. Embedded rewards cannot be cancelled or resent.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "embedded"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price_in_cents\": \"<integer>\",\n  \"brand_code\": \"<string>\",\n  \"id\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44689bd6-cb2f-4146-b31c-50c1762b37b9",
+              "name": "Embedded reward created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embedded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brand_code\": \"itunesus\",\n  \"price_in_cents\": 2500,\n  \"id\": \"myGift12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"campaign\": {\n    \"uuid\": \"string\",\n    \"id\": \"string\",\n    \"price_in_cents\": 4871,\n    \"brand_code\": \"string\",\n    \"brand_codes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fees\": {\n      \"cost_entries\": [\n        {\n          \"percentage\": 9120.367812031129,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 6833,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 5213,\n          \"number_of_gifts\": 840,\n          \"fee_per_gift_in_cents\": 2321\n        },\n        {\n          \"percentage\": 9313.725515451402,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 9025,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 672,\n          \"number_of_gifts\": 1627,\n          \"fee_per_gift_in_cents\": 6771\n        }\n      ],\n      \"subtotal_in_cents\": 6093,\n      \"tax_in_cents\": 9655,\n      \"tax_type\": \"string\",\n      \"total_in_cents\": 9317\n    }\n  },\n  \"gift_link\": \"string\",\n  \"status\": 8863\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc6cf5ae-47a5-4b85-99d6-104ae7a63550",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embedded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brand_code\": \"itunesus\",\n  \"price_in_cents\": 2500,\n  \"id\": \"myGift12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 6974\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eac663e6-7d77-41d5-81a9-092426abdd5f",
+              "name": "The request was valid but could not be processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "embedded"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"brand_code\": \"itunesus\",\n  \"price_in_cents\": 2500,\n  \"id\": \"myGift12345\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 6974\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.giftbit.com/papi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "21998c2d-952d-4224-85f4-b9ec08e8148d",
+    "name": "Giftbit Brands Embedded Rewards API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.\n\n\nContact Support:\n Email: sales@giftbit.com",
+      "type": "text/plain"
+    }
+  }
+}

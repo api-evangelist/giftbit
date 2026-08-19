@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Direct Links API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Direct Links",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve shortlink or direct link URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/links/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The order id (client-supplied or Giftbit UUID)."
+              }
+            ]
+          },
+          "docs": "Returns the reward link URLs for a shortlink or direct link order."
+        },
+        {
+          "info": {
+            "name": "Create direct link order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.giftbit.com/papi/v1/direct_links",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Places an order for direct link rewards. Unlike shortlinks, direct links are not shortened and can be embedded directly in customer communications.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

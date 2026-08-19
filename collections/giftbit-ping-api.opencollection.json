@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Ping API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ping",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Ping",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/ping"
+          },
+          "docs": "A convenient way to test your authentication and confirm the API is reachable. Returns a simple success response when the bearer token is valid.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

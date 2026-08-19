@@ -1,0 +1,162 @@
+{
+  "item": [
+    {
+      "id": "5a3d681c-2cab-4050-811a-745b45640544",
+      "name": "Ping",
+      "description": {
+        "content": "Health check and authentication test",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "42312dd4-54e1-4c71-a7f1-6e2926ba3f87",
+          "name": "Ping",
+          "request": {
+            "name": "Ping",
+            "description": {
+              "content": "A convenient way to test your authentication and confirm the API is reachable. Returns a simple success response when the bearer token is valid.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ping"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1bc5f039-a0da-4c95-8ac9-d145ade40e6c",
+              "name": "Successful ping",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 1364\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a5ea277-66ed-4a5e-b1fd-dd938c675591",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ping"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 2207\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.giftbit.com/papi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b4f30778-6b07-40f7-94ba-83c90939e843",
+    "name": "Giftbit Brands Ping API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.\n\n\nContact Support:\n Email: sales@giftbit.com",
+      "type": "text/plain"
+    }
+  }
+}

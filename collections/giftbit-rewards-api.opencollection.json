@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Rewards API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List rewards",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/gifts",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Return the reward with matching uuid."
+              },
+              {
+                "name": "campaign_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Filter rewards by the order with the matching Giftbit UUID."
+              },
+              {
+                "name": "campaign_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter rewards by the client-supplied order id."
+              },
+              {
+                "name": "price_in_cents_greater_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter rewards with price greater than this value in cents."
+              },
+              {
+                "name": "price_in_cents_less_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter rewards with price less than this value in cents."
+              },
+              {
+                "name": "recipient_name",
+                "value": "",
+                "type": "query",
+                "description": "Filter by recipient name (minimum 3 characters)."
+              },
+              {
+                "name": "recipient_email",
+                "value": "",
+                "type": "query",
+                "description": "Filter by recipient email (minimum 3 characters)."
+              },
+              {
+                "name": "delivery_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by delivery status. Options: UNSENT, DELIVERED, UNDELIVERABLE, TEMPORARILY_UNDELIVERABLE, UNSUBSCRIBED, COMPLAINT.\n"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by reward status. Options: SENT_AND_REDEEMABLE, REDEEMED, TO_CHARITY, GIVER_CANCELLED, EXPIRED.\n"
+              },
+              {
+                "name": "created_date_greater_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by created date. Format yyyy-MM-dd HH:mm:ss."
+              },
+              {
+                "name": "created_date_less_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by created date. Format yyyy-MM-dd HH:mm:ss."
+              },
+              {
+                "name": "delivery_date_greater_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by delivery date. Format yyyy-MM-dd HH:mm:ss."
+              },
+              {
+                "name": "delivery_date_less_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by delivery date. Format yyyy-MM-dd HH:mm:ss."
+              },
+              {
+                "name": "redelivery_count_greater_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by redelivery count greater than this value."
+              },
+              {
+                "name": "redelivery_count_less_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by redelivery count less than this value."
+              },
+              {
+                "name": "redeemed_date_greater_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by redeemed date. Format yyyy-MM-dd HH:mm:ss."
+              },
+              {
+                "name": "redeemed_date_less_than",
+                "value": "",
+                "type": "query",
+                "description": "Filter by redeemed date. Format yyyy-MM-dd HH:mm:ss."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of rewards to return. Default 20."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into results. Default 0."
+              },
+              {
+                "name": "sort",
+                "value": "",
+                "type": "query",
+                "description": "Sort field. Options: campaign_id, price_in_cents, recipient_name, recipient_email, delivery_status, status.\n"
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction. Options asc or desc. Default desc."
+              }
+            ]
+          },
+          "docs": "Returns a paginated, filterable list of rewards across all orders. Supports filtering by delivery status, redemption status, date ranges, recipient name/email, and price range.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/gifts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The Giftbit UUID of the reward (not the order uuid or id)."
+              }
+            ]
+          },
+          "docs": "Returns the details for a single reward by its Giftbit-generated UUID."
+        },
+        {
+          "info": {
+            "name": "Resend reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.giftbit.com/papi/v1/gifts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The Giftbit UUID of the reward."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resends a reward email to the original recipient. Not available for embedded rewards or already-claimed rewards.\n"
+        },
+        {
+          "info": {
+            "name": "Cancel reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.giftbit.com/papi/v1/gifts/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "The Giftbit UUID of the reward."
+              }
+            ]
+          },
+          "docs": "Cancels a reward that has not yet been claimed. Credits for unclaimed rewards are returned to the account. Cannot cancel embedded rewards or already-claimed rewards.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

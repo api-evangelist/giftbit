@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Brands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List brands",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/brands",
+            "params": [
+              {
+                "name": "region",
+                "value": "",
+                "type": "query",
+                "description": "Filter brands by geographic region."
+              },
+              {
+                "name": "max_price_in_cents",
+                "value": "",
+                "type": "query",
+                "description": "Maximum reward price in cents."
+              },
+              {
+                "name": "min_price_in_cents",
+                "value": "",
+                "type": "query",
+                "description": "Minimum reward price in cents."
+              },
+              {
+                "name": "currencyisocode",
+                "value": "",
+                "type": "query",
+                "description": "ISO currency code (e.g. USD, CAD)."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search string to filter brands by name."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of brands to return. Default 20."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset into the result set."
+              },
+              {
+                "name": "embeddable",
+                "value": "",
+                "type": "query",
+                "description": "Filter to brands that support embedded rewards."
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of available reward brands. Filter by region, price range, currency, and whether brands are embeddable.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve brand",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/brands/:brand_code",
+            "params": [
+              {
+                "name": "brand_code",
+                "value": "",
+                "type": "path",
+                "description": "The unique code identifying the brand (e.g. itunesus, amazonus)."
+              }
+            ]
+          },
+          "docs": "Returns details for a single reward brand by its brand code."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

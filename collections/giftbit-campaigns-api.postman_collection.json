@@ -1,0 +1,442 @@
+{
+  "item": [
+    {
+      "id": "fd27d6fd-b041-45cf-86af-885e0ec14cb2",
+      "name": "Campaigns",
+      "description": {
+        "content": "Create and manage email reward orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7df8640a-ee19-4e31-b189-4c48d5775cd9",
+          "name": "Create email order",
+          "request": {
+            "name": "Create email order",
+            "description": {
+              "content": "Places an order for one or more emailed rewards. Supports single-brand and full-catalog (multi-brand) reward offers. A client-supplied `id` makes this operation idempotent — resend safely on unexpected errors.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"contacts\": [\n    {\n      \"email\": \"<email>\",\n      \"firstname\": \"<string>\",\n      \"lastname\": \"<string>\"\n    },\n    {\n      \"email\": \"<email>\",\n      \"firstname\": \"<string>\",\n      \"lastname\": \"<string>\"\n    }\n  ],\n  \"price_in_cents\": \"<integer>\",\n  \"id\": \"<string>\",\n  \"message\": \"<string>\",\n  \"subject\": \"<string>\",\n  \"gift_template\": \"<string>\",\n  \"brand_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"region\": \"<string>\",\n  \"expiry\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a93097f9-2c68-4b6d-9d3b-8fc4dc74d228",
+              "name": "Order created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gift_template\": \"XDKHE\",\n  \"contacts\": [\n    {\n      \"firstname\": \"Perry\",\n      \"lastname\": \"Johnson\",\n      \"email\": \"pjohnson@giftbit.com\"\n    }\n  ],\n  \"price_in_cents\": 2500,\n  \"brand_codes\": [\n    \"itunesus\",\n    \"amazonus\"\n  ],\n  \"id\": \"order-abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"campaign\": {\n    \"uuid\": \"string\",\n    \"id\": \"string\",\n    \"price_in_cents\": 1217,\n    \"brand_code\": \"string\",\n    \"brand_codes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fees\": {\n      \"cost_entries\": [\n        {\n          \"percentage\": 9235.052955702537,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 1437,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 5867,\n          \"number_of_gifts\": 6729,\n          \"fee_per_gift_in_cents\": 4552\n        },\n        {\n          \"percentage\": 4527.106258746484,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 8761,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 4721,\n          \"number_of_gifts\": 4142,\n          \"fee_per_gift_in_cents\": 7868\n        }\n      ],\n      \"subtotal_in_cents\": 9872,\n      \"tax_in_cents\": 7109,\n      \"tax_type\": \"string\",\n      \"total_in_cents\": 8390\n    }\n  },\n  \"status\": 60\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d204b0b-52bc-4038-ac19-ed733439e7e9",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gift_template\": \"XDKHE\",\n  \"contacts\": [\n    {\n      \"firstname\": \"Perry\",\n      \"lastname\": \"Johnson\",\n      \"email\": \"pjohnson@giftbit.com\"\n    }\n  ],\n  \"price_in_cents\": 2500,\n  \"brand_codes\": [\n    \"itunesus\",\n    \"amazonus\"\n  ],\n  \"id\": \"order-abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 2557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1dd0e0e-fa76-45d6-9bf3-9c6e2bc57d6b",
+              "name": "The request was valid but could not be processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gift_template\": \"XDKHE\",\n  \"contacts\": [\n    {\n      \"firstname\": \"Perry\",\n      \"lastname\": \"Johnson\",\n      \"email\": \"pjohnson@giftbit.com\"\n    }\n  ],\n  \"price_in_cents\": 2500,\n  \"brand_codes\": [\n    \"itunesus\",\n    \"amazonus\"\n  ],\n  \"id\": \"order-abc123\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 2557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "62c17b7d-882c-40af-8297-94a00279adc0",
+          "name": "Retrieve order by ID",
+          "request": {
+            "name": "Retrieve order by ID",
+            "description": {
+              "content": "Retrieves status and information about a specified reward order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "campaign",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The client-supplied identifier for the order."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f7a7a1e2-644c-4282-acbf-04b7c360c54c",
+              "name": "Order details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The client-supplied identifier for the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"campaign\": {\n    \"uuid\": \"string\",\n    \"id\": \"string\",\n    \"price_in_cents\": 9456,\n    \"brand_code\": \"string\",\n    \"brand_codes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fees\": {\n      \"cost_entries\": [\n        {\n          \"percentage\": 6966.094339066677,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 6773,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 3804,\n          \"number_of_gifts\": 9147,\n          \"fee_per_gift_in_cents\": 6087\n        },\n        {\n          \"percentage\": 1653.9518505892925,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 8839,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 2483,\n          \"number_of_gifts\": 2685,\n          \"fee_per_gift_in_cents\": 699\n        }\n      ],\n      \"subtotal_in_cents\": 5876,\n      \"tax_in_cents\": 1881,\n      \"tax_type\": \"string\",\n      \"total_in_cents\": 1538\n    }\n  },\n  \"status\": 5875\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d1462ed-3afb-4af9-a761-b6e1926d3da2",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The client-supplied identifier for the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 2557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1afbc0dc-926a-4de8-bd10-2175a1cd0b01",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "campaign",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The client-supplied identifier for the order."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 2557\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.giftbit.com/papi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "18bc2558-9c25-4ff1-9813-a5376059a6fe",
+    "name": "Giftbit Brands Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.\n\n\nContact Support:\n Email: sales@giftbit.com",
+      "type": "text/plain"
+    }
+  }
+}

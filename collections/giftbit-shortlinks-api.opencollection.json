@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Shortlinks API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shortlinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create shortlink order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.giftbit.com/papi/v1/shortlink",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Places an order for shortlink rewards. Recipients access their reward via a shortened URL suitable for SMS, social media, or other channels.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve shortlink or direct link URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/links/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The order id (client-supplied or Giftbit UUID)."
+              }
+            ]
+          },
+          "docs": "Returns the reward link URLs for a shortlink or direct link order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

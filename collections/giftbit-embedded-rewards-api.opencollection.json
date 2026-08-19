@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Embedded Rewards API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Embedded Rewards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create embedded reward",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.giftbit.com/papi/v1/embedded",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Places a single reward order for immediate in-app delivery. Returns a `gift_link` URL for embedding in your app. Recipients are automatically directed to the card without additional claim steps. Embedded rewards cannot be cancelled or resent.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

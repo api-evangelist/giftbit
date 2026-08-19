@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Regions API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Regions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List regions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/regions"
+          },
+          "docs": "Returns the list of supported geographic regions for full-catalog rewards."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

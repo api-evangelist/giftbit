@@ -1,0 +1,50 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Funds API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Funds",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve funding information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/funds"
+          },
+          "docs": "Returns a real-time overview of the account balance broken down by currency (USD, CAD, PRO demo credits), including available, pending, and reserved amounts.\n"
+        },
+        {
+          "info": {
+            "name": "Add funds through credit card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.giftbit.com/papi/v1/funds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Tops up the account balance using a credit card on file. The credit card must be set up in the web application under Purchase Credits. Use the client-supplied `id` for idempotent retries.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

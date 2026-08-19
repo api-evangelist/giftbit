@@ -1,0 +1,442 @@
+{
+  "item": [
+    {
+      "id": "46d043f7-6880-41eb-9b2a-0e4f29bf3b75",
+      "name": "Shortlinks",
+      "description": {
+        "content": "Create shortlink reward orders",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "dac3009d-a60e-4341-8f31-de5522dd9d08",
+          "name": "Create shortlink order",
+          "request": {
+            "name": "Create shortlink order",
+            "description": {
+              "content": "Places an order for shortlink rewards. Recipients access their reward via a shortened URL suitable for SMS, social media, or other channels.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "shortlink"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"price_in_cents\": \"<integer>\",\n  \"id\": \"<string>\",\n  \"brand_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"region\": \"<string>\",\n  \"link_count\": \"<integer>\",\n  \"expiry\": \"<date>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "212284ae-e93a-45fb-a194-13af3e74541a",
+              "name": "Shortlink order created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shortlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price_in_cents\": \"<integer>\",\n  \"id\": \"<string>\",\n  \"brand_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"region\": \"<string>\",\n  \"link_count\": \"<integer>\",\n  \"expiry\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"campaign\": {\n    \"uuid\": \"string\",\n    \"id\": \"string\",\n    \"price_in_cents\": 667,\n    \"brand_code\": \"string\",\n    \"brand_codes\": [\n      \"string\",\n      \"string\"\n    ],\n    \"fees\": {\n      \"cost_entries\": [\n        {\n          \"percentage\": 4757.359385331866,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 5746,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 1319,\n          \"number_of_gifts\": 45,\n          \"fee_per_gift_in_cents\": 8489\n        },\n        {\n          \"percentage\": 8084.215025939117,\n          \"fee_type\": \"string\",\n          \"amount_in_cents\": 319,\n          \"currency\": \"string\",\n          \"tax_type\": \"string\",\n          \"tax_in_cents\": 4066,\n          \"number_of_gifts\": 5681,\n          \"fee_per_gift_in_cents\": 3976\n        }\n      ],\n      \"subtotal_in_cents\": 3718,\n      \"tax_in_cents\": 2994,\n      \"tax_type\": \"string\",\n      \"total_in_cents\": 641\n    }\n  },\n  \"status\": 966\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8f9102c-89ca-4b1b-8eb1-42445b26530c",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shortlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price_in_cents\": \"<integer>\",\n  \"id\": \"<string>\",\n  \"brand_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"region\": \"<string>\",\n  \"link_count\": \"<integer>\",\n  \"expiry\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 5996\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b26582b6-d941-463c-8516-8a2fa11841ab",
+              "name": "The request was valid but could not be processed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "shortlink"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"price_in_cents\": \"<integer>\",\n  \"id\": \"<string>\",\n  \"brand_codes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"region\": \"<string>\",\n  \"link_count\": \"<integer>\",\n  \"expiry\": \"<date>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 5996\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85209ff9-487d-43d7-a85c-c41d3f63ee76",
+          "name": "Retrieve shortlink or direct link URLs",
+          "request": {
+            "name": "Retrieve shortlink or direct link URLs",
+            "description": {
+              "content": "Returns the reward link URLs for a shortlink or direct link order.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "links",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The order id (client-supplied or Giftbit UUID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cec61e82-f7eb-4ded-81c4-14026089075a",
+              "name": "Link URLs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The order id (client-supplied or Giftbit UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"links\": [\n    \"string\",\n    \"string\"\n  ],\n  \"info\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 9194\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f08fd27-c116-4b19-8b70-6f69a08e652b",
+              "name": "Authentication failed — invalid or missing bearer token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The order id (client-supplied or Giftbit UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 5996\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "100d56ed-a026-40ea-8a25-7a3cecc7cc79",
+              "name": "The requested resource was not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "links",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The order id (client-supplied or Giftbit UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"name\": \"string\",\n    \"message\": \"string\"\n  },\n  \"status\": 5996\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.giftbit.com/papi/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f1264311-c79b-4cfc-8330-a1be398b38c2",
+    "name": "Giftbit Brands Shortlinks API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.\n\n\nContact Support:\n Email: sales@giftbit.com",
+      "type": "text/plain"
+    }
+  }
+}

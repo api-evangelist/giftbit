@@ -1,0 +1,58 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Giftbit Brands Campaigns API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create email order",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.giftbit.com/papi/v1/campaign",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Places an order for one or more emailed rewards. Supports single-brand and full-catalog (multi-brand) reward offers. A client-supplied `id` makes this operation idempotent — resend safely on unexpected errors.\n"
+        },
+        {
+          "info": {
+            "name": "Retrieve order by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.giftbit.com/papi/v1/campaign/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The client-supplied identifier for the order."
+              }
+            ]
+          },
+          "docs": "Retrieves status and information about a specified reward order."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
