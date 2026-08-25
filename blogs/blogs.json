@@ -5,7 +5,7 @@
       "source": "https://www.giftbit.com/blog/rss.xml",
       "feed_url": "https://www.giftbit.com/blog/rss.xml",
       "title": "",
-      "saved": 2,
+      "saved": 0,
       "method": "feed"
     },
     {
@@ -13,10 +13,9 @@
       "feed_url": "https://www.linkedin.com/company/giftbit",
       "title": "",
       "saved": 0,
-      "method": "none",
-      "error": "parse_failed"
+      "method": "none"
     }
   ],
-  "fetched": "2026-08-15T12:11:08Z",
+  "fetched": "2026-08-22T20:20:02Z",
   "post_count": 16
 }
