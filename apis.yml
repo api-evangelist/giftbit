@@ -7,6 +7,18 @@ description: >
   40+ countries. The API enables businesses to send single-brand or multi-brand
   rewards via email delivery, shortlinks, direct links, or in-app embeds, with
   no platform subscription fees — paying only the face value of rewards sent.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
