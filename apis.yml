@@ -163,7 +163,7 @@ apis:
   humanURL: https://www.giftbit.com/gift-card-api
   baseURL: https://api.giftbit.com/papi/v1
   tags:
-  - Shortlinks
+  - Short Links
   tags_raw:
   - Shortlinks
   properties:
