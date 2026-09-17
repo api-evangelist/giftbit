@@ -158,18 +158,16 @@ apis:
     url: https://www.giftbit.com/giftbitapi/
   - type: Sandbox
     url: https://testbed.giftbit.com
-- aid: giftbit:giftbit-shortlinks-api
-  name: Giftbit Shortlinks API
+- aid: giftbit:giftbit-short-links-api
+  name: Giftbit Short Links API
   description: Create shortlink reward orders
   humanURL: https://www.giftbit.com/gift-card-api
   baseURL: https://api.giftbit.com/papi/v1
   tags:
   - Short Links
-  tags_raw:
-  - Shortlinks
   properties:
   - type: OpenAPI
-    url: openapi/giftbit-shortlinks-api-openapi.yml
+    url: openapi/giftbit-short-links-api-openapi.yml
   - type: Documentation
     url: https://www.giftbit.com/giftbitapi/
   - type: Sandbox
