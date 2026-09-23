@@ -1,15 +1,7 @@
 {
   "provider": "giftbit",
   "sources": [
-    "giftbit-brands-api-openapi.yml",
-    "giftbit-campaigns-api-openapi.yml",
-    "giftbit-direct-links-api-openapi.yml",
-    "giftbit-embedded-rewards-api-openapi.yml",
-    "giftbit-funds-api-openapi.yml",
-    "giftbit-ping-api-openapi.yml",
-    "giftbit-regions-api-openapi.yml",
-    "giftbit-rewards-api-openapi.yml",
-    "giftbit-shortlinks-api-openapi.yml"
+    "_original/giftbit-openapi.yml"
   ],
   "outputs": [
     "giftbit-brands-api-openapi.yml",
@@ -22,9 +14,26 @@
     "giftbit-rewards-api-openapi.yml",
     "giftbit-shortlinks-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "giftbit-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "superseded outputs removed: giftbit-short-links-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 9 total)"
+  ],
+  "skipped": [
+    "giftbit-brands-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-campaigns-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-direct-links-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-embedded-rewards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-funds-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-ping-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-regions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-rewards-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "giftbit-short-links-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

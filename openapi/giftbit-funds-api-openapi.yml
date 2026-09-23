@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Giftbit Brands Funds API
-  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
-
-    '
+  title: Giftbit Funds API
+  description: Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
   version: 1.0.0
   contact:
     email: sales@giftbit.com
@@ -23,9 +21,7 @@ paths:
     get:
       operationId: retrieveFundingInformation
       summary: Retrieve funding information
-      description: 'Returns a real-time overview of the account balance broken down by currency (USD, CAD, PRO demo credits), including available, pending, and reserved amounts.
-
-        '
+      description: Returns a real-time overview of the account balance broken down by currency (USD, CAD, PRO demo credits), including available, pending, and reserved amounts.
       tags:
       - Funds
       responses:
@@ -40,9 +36,7 @@ paths:
     post:
       operationId: addFunds
       summary: Add funds through credit card
-      description: 'Tops up the account balance using a credit card on file. The credit card must be set up in the web application under Purchase Credits. Use the client-supplied `id` for idempotent retries.
-
-        '
+      description: Tops up the account balance using a credit card on file. The credit card must be set up in the web application under Purchase Credits. Use the client-supplied `id` for idempotent retries.
       tags:
       - Funds
       requestBody:
@@ -70,34 +64,6 @@ paths:
           $ref: '#/components/responses/PaymentRequired'
 components:
   schemas:
-    FundsResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        fundsbycurrency:
-          type: object
-          properties:
-            USD:
-              $ref: '#/components/schemas/CurrencyBalance'
-            CAD:
-              $ref: '#/components/schemas/CurrencyBalance'
-            PRO:
-              $ref: '#/components/schemas/CurrencyBalance'
-        status:
-          type: integer
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
     ErrorResponse:
       type: object
       properties:
@@ -149,15 +115,43 @@ components:
         message:
           type: string
           description: Context-specific status message.
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    FundsResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        fundsbycurrency:
+          type: object
+          properties:
+            USD:
+              $ref: '#/components/schemas/CurrencyBalance'
+            CAD:
+              $ref: '#/components/schemas/CurrencyBalance'
+            PRO:
+              $ref: '#/components/schemas/CurrencyBalance'
+        status:
+          type: integer
   responses:
-    BadRequest:
-      description: The request contained invalid parameters.
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed — invalid or missing bearer token.
+    BadRequest:
+      description: The request contained invalid parameters.
       content:
         application/json:
           schema:

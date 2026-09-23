@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Giftbit Brands Rewards API
-  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
-
-    '
+  title: Giftbit Rewards API
+  description: Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
   version: 1.0.0
   contact:
     email: sales@giftbit.com
@@ -23,9 +21,7 @@ paths:
     get:
       operationId: listRewards
       summary: List rewards
-      description: 'Returns a paginated, filterable list of rewards across all orders. Supports filtering by delivery status, redemption status, date ranges, recipient name/email, and price range.
-
-        '
+      description: Returns a paginated, filterable list of rewards across all orders. Supports filtering by delivery status, redemption status, date ranges, recipient name/email, and price range.
       tags:
       - Rewards
       parameters:
@@ -203,9 +199,7 @@ paths:
     put:
       operationId: resendReward
       summary: Resend reward
-      description: 'Resends a reward email to the original recipient. Not available for embedded rewards or already-claimed rewards.
-
-        '
+      description: Resends a reward email to the original recipient. Not available for embedded rewards or already-claimed rewards.
       tags:
       - Rewards
       parameters:
@@ -242,9 +236,7 @@ paths:
     delete:
       operationId: cancelReward
       summary: Cancel reward
-      description: 'Cancels a reward that has not yet been claimed. Credits for unclaimed rewards are returned to the account. Cannot cancel embedded rewards or already-claimed rewards.
-
-        '
+      description: Cancels a reward that has not yet been claimed. Credits for unclaimed rewards are returned to the account. Cannot cancel embedded rewards or already-claimed rewards.
       tags:
       - Rewards
       parameters:
@@ -267,18 +259,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
     ErrorResponse:
       type: object
       properties:
@@ -344,6 +324,39 @@ components:
         delivery_date:
           type: string
           description: Date reward was delivered. Format yyyy-MM-dd HH:mm:ss.
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+    RewardResponse:
+      type: object
+      properties:
+        gift:
+          $ref: '#/components/schemas/Reward'
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
     RewardsListResponse:
       type: object
       properties:
@@ -363,27 +376,6 @@ components:
           $ref: '#/components/schemas/InfoBlock'
         status:
           type: integer
-    RewardResponse:
-      type: object
-      properties:
-        gift:
-          $ref: '#/components/schemas/Reward'
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
-          type: integer
-    InfoBlock:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
   responses:
     NotFound:
       description: The requested resource was not found.

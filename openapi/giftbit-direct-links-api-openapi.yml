@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Giftbit Brands Direct Links API
-  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
-
-    '
+  title: Giftbit Direct Links API
+  description: Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
   version: 1.0.0
   contact:
     email: sales@giftbit.com
@@ -48,9 +46,7 @@ paths:
     post:
       operationId: createDirectLinkOrder
       summary: Create direct link order
-      description: 'Places an order for direct link rewards. Unlike shortlinks, direct links are not shortened and can be embedded directly in customer communications.
-
-        '
+      description: Places an order for direct link rewards. Unlike shortlinks, direct links are not shortened and can be embedded directly in customer communications.
       tags:
       - Direct Links
       requestBody:
@@ -72,6 +68,81 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+    Campaign:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Giftbit-generated unique order identifier.
+        id:
+          type: string
+          description: Client-supplied order identifier.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_code:
+          type: string
+          description: Brand code (single-brand orders).
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: Brand codes (multi-brand orders).
+        fees:
+          $ref: '#/components/schemas/Fees'
+    CampaignResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        status:
+          type: integer
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    LinksResponse:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            type: string
+          description: Array of reward link URLs.
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
     CreateDirectLinkOrderRequest:
       type: object
       required:
@@ -99,84 +170,6 @@ components:
         id:
           type: string
           description: Client-supplied unique order identifier.
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
-    Fees:
-      type: object
-      properties:
-        cost_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeEntry'
-        subtotal_in_cents:
-          type: integer
-        tax_in_cents:
-          type: integer
-        tax_type:
-          type: string
-        total_in_cents:
-          type: integer
-    CampaignResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        status:
-          type: integer
-    Campaign:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Giftbit-generated unique order identifier.
-        id:
-          type: string
-          description: Client-supplied order identifier.
-        price_in_cents:
-          type: integer
-          description: Reward value in cents.
-        brand_code:
-          type: string
-          description: Brand code (single-brand orders).
-        brand_codes:
-          type: array
-          items:
-            type: string
-          description: Brand codes (multi-brand orders).
-        fees:
-          $ref: '#/components/schemas/Fees'
-    LinksResponse:
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            type: string
-          description: Array of reward link URLs.
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
-          type: integer
     FeeEntry:
       type: object
       properties:
@@ -204,18 +197,21 @@ components:
         fee_per_gift_in_cents:
           type: integer
           description: Per-gift fee in cents.
-    InfoBlock:
+    Fees:
       type: object
       properties:
-        code:
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
+          type: integer
+        tax_in_cents:
+          type: integer
+        tax_type:
           type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
+        total_in_cents:
+          type: integer
   responses:
     NotFound:
       description: The requested resource was not found.

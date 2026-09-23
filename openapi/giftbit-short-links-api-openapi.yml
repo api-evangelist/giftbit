@@ -1,9 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Giftbit Brands Shortlinks API
-  description: 'Giftbit''s REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system''s workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
-
-    '
+  title: Giftbit Shortlinks API
+  description: Giftbit's REST API allows you to automatically order rewards and send them to your recipients. Delivery can be handled either by links integrated into another system's workflow or by emails sent through the Giftbit system. The API supports email delivery, shortlinks, direct links, and in-app embedded reward flows across 1,500+ brands in 40+ countries.
   version: 1.0.0
   contact:
     email: sales@giftbit.com
@@ -16,18 +14,16 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: Shortlinks
+- name: Short Links
   description: Create shortlink reward orders
 paths:
   /shortlink:
     post:
       operationId: createShortlinkOrder
       summary: Create shortlink order
-      description: 'Places an order for shortlink rewards. Recipients access their reward via a shortened URL suitable for SMS, social media, or other channels.
-
-        '
+      description: Places an order for shortlink rewards. Recipients access their reward via a shortened URL suitable for SMS, social media, or other channels.
       tags:
-      - Shortlinks
+      - Short Links
       requestBody:
         required: true
         content:
@@ -51,7 +47,7 @@ paths:
       summary: Retrieve shortlink or direct link URLs
       description: Returns the reward link URLs for a shortlink or direct link order.
       tags:
-      - Shortlinks
+      - Short Links
       parameters:
       - name: id
         in: path
@@ -72,18 +68,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
     ErrorResponse:
       type: object
       properties:
@@ -92,30 +76,18 @@ components:
         status:
           type: integer
           description: HTTP status code.
-    Fees:
+    InfoBlock:
       type: object
       properties:
-        cost_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeEntry'
-        subtotal_in_cents:
-          type: integer
-        tax_in_cents:
-          type: integer
-        tax_type:
+        code:
           type: string
-        total_in_cents:
-          type: integer
-    CampaignResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        status:
-          type: integer
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
     Campaign:
       type: object
       properties:
@@ -138,33 +110,27 @@ components:
           description: Brand codes (multi-brand orders).
         fees:
           $ref: '#/components/schemas/Fees'
-    CreateShortlinkOrderRequest:
+    CampaignResponse:
       type: object
-      required:
-      - price_in_cents
-      - id
       properties:
-        price_in_cents:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        status:
           type: integer
-          description: Reward value in cents.
-        brand_codes:
-          type: array
-          items:
-            type: string
-          description: List of brand codes.
-        region:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
           type: string
-          description: Geographic region for full-catalog rewards.
-        link_count:
-          type: integer
-          description: Number of shortlink URLs to generate.
-        expiry:
+          description: Enum-style error code.
+        name:
           type: string
-          format: date
-          description: Claim-before date (YYYY-MM-dd).
-        id:
+          description: Human-readable error name.
+        message:
           type: string
-          description: Client-supplied unique order identifier.
+          description: Context-specific error message.
     LinksResponse:
       type: object
       properties:
@@ -204,18 +170,48 @@ components:
         fee_per_gift_in_cents:
           type: integer
           description: Per-gift fee in cents.
-    InfoBlock:
+    CreateShortlinkOrderRequest:
+      type: object
+      required:
+      - price_in_cents
+      - id
+      properties:
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: List of brand codes.
+        region:
+          type: string
+          description: Geographic region for full-catalog rewards.
+        link_count:
+          type: integer
+          description: Number of shortlink URLs to generate.
+        expiry:
+          type: string
+          format: date
+          description: Claim-before date (YYYY-MM-dd).
+        id:
+          type: string
+          description: Client-supplied unique order identifier.
+    Fees:
       type: object
       properties:
-        code:
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
+          type: integer
+        tax_in_cents:
+          type: integer
+        tax_type:
           type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
+        total_in_cents:
+          type: integer
   responses:
     NotFound:
       description: The requested resource was not found.
