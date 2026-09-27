@@ -35,14 +35,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
     InfoBlock:
       type: object
       properties:
@@ -62,6 +54,14 @@ components:
           $ref: '#/components/schemas/InfoBlock'
         status:
           type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
     ErrorDetail:
       type: object
       properties:

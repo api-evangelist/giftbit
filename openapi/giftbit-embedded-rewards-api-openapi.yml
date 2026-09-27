@@ -47,14 +47,21 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ErrorResponse:
+    Fees:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
           type: integer
-          description: HTTP status code.
+        tax_in_cents:
+          type: integer
+        tax_type:
+          type: string
+        total_in_cents:
+          type: integer
     InfoBlock:
       type: object
       properties:
@@ -67,6 +74,22 @@ components:
         message:
           type: string
           description: Context-specific status message.
+    CreateEmbeddedRewardRequest:
+      type: object
+      required:
+      - price_in_cents
+      - brand_code
+      - id
+      properties:
+        price_in_cents:
+          type: integer
+          description: Reward value in cents (e.g. 2500 = $25.00).
+        brand_code:
+          type: string
+          description: Single brand code for the embedded reward.
+        id:
+          type: string
+          description: Client-supplied unique order identifier.
     Campaign:
       type: object
       properties:
@@ -89,34 +112,14 @@ components:
           description: Brand codes (multi-brand orders).
         fees:
           $ref: '#/components/schemas/Fees'
-    CreateEmbeddedRewardRequest:
+    ErrorResponse:
       type: object
-      required:
-      - price_in_cents
-      - brand_code
-      - id
       properties:
-        price_in_cents:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
           type: integer
-          description: Reward value in cents (e.g. 2500 = $25.00).
-        brand_code:
-          type: string
-          description: Single brand code for the embedded reward.
-        id:
-          type: string
-          description: Client-supplied unique order identifier.
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
+          description: HTTP status code.
     FeeEntry:
       type: object
       properties:
@@ -144,21 +147,18 @@ components:
         fee_per_gift_in_cents:
           type: integer
           description: Per-gift fee in cents.
-    Fees:
+    ErrorDetail:
       type: object
       properties:
-        cost_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeEntry'
-        subtotal_in_cents:
-          type: integer
-        tax_in_cents:
-          type: integer
-        tax_type:
+        code:
           type: string
-        total_in_cents:
-          type: integer
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
     EmbeddedRewardResponse:
       type: object
       properties:

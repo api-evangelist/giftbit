@@ -68,14 +68,30 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ErrorResponse:
+    Fees:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
+          type: integer
+        tax_in_cents:
+          type: integer
+        tax_type:
+          type: string
+        total_in_cents:
+          type: integer
+    CampaignResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
         status:
           type: integer
-          description: HTTP status code.
     InfoBlock:
       type: object
       properties:
@@ -88,49 +104,6 @@ components:
         message:
           type: string
           description: Context-specific status message.
-    Campaign:
-      type: object
-      properties:
-        uuid:
-          type: string
-          description: Giftbit-generated unique order identifier.
-        id:
-          type: string
-          description: Client-supplied order identifier.
-        price_in_cents:
-          type: integer
-          description: Reward value in cents.
-        brand_code:
-          type: string
-          description: Brand code (single-brand orders).
-        brand_codes:
-          type: array
-          items:
-            type: string
-          description: Brand codes (multi-brand orders).
-        fees:
-          $ref: '#/components/schemas/Fees'
-    CampaignResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        status:
-          type: integer
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
     LinksResponse:
       type: object
       properties:
@@ -170,6 +143,36 @@ components:
         id:
           type: string
           description: Client-supplied unique order identifier.
+    Campaign:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Giftbit-generated unique order identifier.
+        id:
+          type: string
+          description: Client-supplied order identifier.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_code:
+          type: string
+          description: Brand code (single-brand orders).
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: Brand codes (multi-brand orders).
+        fees:
+          $ref: '#/components/schemas/Fees'
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
     FeeEntry:
       type: object
       properties:
@@ -197,22 +200,25 @@ components:
         fee_per_gift_in_cents:
           type: integer
           description: Per-gift fee in cents.
-    Fees:
+    ErrorDetail:
       type: object
       properties:
-        cost_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeEntry'
-        subtotal_in_cents:
-          type: integer
-        tax_in_cents:
-          type: integer
-        tax_type:
+        code:
           type: string
-        total_in_cents:
-          type: integer
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
   responses:
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -221,12 +227,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     UnprocessableEntity:
       description: The request was valid but could not be processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed — invalid or missing bearer token.
       content:
         application/json:
           schema:

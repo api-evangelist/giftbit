@@ -45,6 +45,8 @@ tags:
   - Payments
   - Reward Distribution
   - Prepaid Cards
+  - Loyalty
+  - Loyalty & Incentives
 apis:
 - aid: giftbit:giftbit-brands-api
   name: Giftbit Brands API

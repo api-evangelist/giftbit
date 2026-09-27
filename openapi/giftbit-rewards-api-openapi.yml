@@ -259,14 +259,18 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    ErrorResponse:
+    InfoBlock:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
     Reward:
       type: object
       properties:
@@ -324,18 +328,33 @@ components:
         delivery_date:
           type: string
           description: Date reward was delivered. Format yyyy-MM-dd HH:mm:ss.
-    InfoBlock:
+    RewardsListResponse:
       type: object
       properties:
-        code:
-          type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
+        gifts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reward'
+        number_of_results:
+          type: integer
+        limit:
+          type: integer
+        offset:
+          type: integer
+        total_count:
+          type: integer
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
     RewardResponse:
       type: object
       properties:
@@ -357,26 +376,13 @@ components:
         message:
           type: string
           description: Context-specific error message.
-    RewardsListResponse:
-      type: object
-      properties:
-        gifts:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reward'
-        number_of_results:
-          type: integer
-        limit:
-          type: integer
-        offset:
-          type: integer
-        total_count:
-          type: integer
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
-          type: integer
   responses:
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
       content:
@@ -385,12 +391,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     UnprocessableEntity:
       description: The request was valid but could not be processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed — invalid or missing bearer token.
       content:
         application/json:
           schema:
