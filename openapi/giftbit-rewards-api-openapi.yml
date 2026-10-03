@@ -258,6 +258,25 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
+  responses:
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
     InfoBlock:
       type: object
@@ -328,6 +347,18 @@ components:
         delivery_date:
           type: string
           description: Date reward was delivered. Format yyyy-MM-dd HH:mm:ss.
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
     RewardsListResponse:
       type: object
       properties:
@@ -364,37 +395,6 @@ components:
           $ref: '#/components/schemas/InfoBlock'
         status:
           type: integer
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-  responses:
-    Unauthorized:
-      description: Authentication failed — invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: The request was valid but could not be processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     BearerAuth:
       type: http

@@ -35,6 +35,17 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    RegionsResponse:
+      type: object
+      properties:
+        regions:
+          type: array
+          items:
+            type: string
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
     InfoBlock:
       type: object
       properties:
@@ -47,25 +58,6 @@ components:
         message:
           type: string
           description: Context-specific status message.
-    RegionsResponse:
-      type: object
-      properties:
-        regions:
-          type: array
-          items:
-            type: string
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
-          type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
     ErrorDetail:
       type: object
       properties:
@@ -78,6 +70,14 @@ components:
         message:
           type: string
           description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
   responses:
     Unauthorized:
       description: Authentication failed — invalid or missing bearer token.

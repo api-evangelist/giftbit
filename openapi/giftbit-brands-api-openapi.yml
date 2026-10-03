@@ -103,18 +103,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    InfoBlock:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
     BrandsResponse:
       type: object
       properties:
@@ -130,15 +118,6 @@ components:
           type: integer
         total_count:
           type: integer
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
-          type: integer
-    BrandResponse:
-      type: object
-      properties:
-        brand:
-          $ref: '#/components/schemas/Brand'
         info:
           $ref: '#/components/schemas/InfoBlock'
         status:
@@ -170,14 +149,18 @@ components:
         embeddable:
           type: boolean
           description: Whether this brand supports embedded rewards.
-    ErrorResponse:
+    InfoBlock:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
     ErrorDetail:
       type: object
       properties:
@@ -190,6 +173,23 @@ components:
         message:
           type: string
           description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    BrandResponse:
+      type: object
+      properties:
+        brand:
+          $ref: '#/components/schemas/Brand'
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
   responses:
     Unauthorized:
       description: Authentication failed — invalid or missing bearer token.

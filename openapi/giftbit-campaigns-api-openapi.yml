@@ -79,60 +79,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    Fees:
-      type: object
-      properties:
-        cost_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeEntry'
-        subtotal_in_cents:
-          type: integer
-        tax_in_cents:
-          type: integer
-        tax_type:
-          type: string
-        total_in_cents:
-          type: integer
-    CampaignResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        status:
-          type: integer
-    InfoBlock:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
-    Contact:
-      type: object
-      required:
-      - email
-      properties:
-        email:
-          type: string
-          format: email
-          description: Recipient email address.
-          example: pjohnson@giftbit.com
-        firstname:
-          type: string
-          description: Recipient first name.
-          example: Perry
-        lastname:
-          type: string
-          description: Recipient last name.
-          example: Johnson
     CreateEmailOrderRequest:
       type: object
       required:
@@ -172,36 +118,21 @@ components:
         id:
           type: string
           description: Client-supplied unique order identifier for idempotent requests.
-    Campaign:
+    Fees:
       type: object
       properties:
-        uuid:
-          type: string
-          description: Giftbit-generated unique order identifier.
-        id:
-          type: string
-          description: Client-supplied order identifier.
-        price_in_cents:
-          type: integer
-          description: Reward value in cents.
-        brand_code:
-          type: string
-          description: Brand code (single-brand orders).
-        brand_codes:
+        cost_entries:
           type: array
           items:
-            type: string
-          description: Brand codes (multi-brand orders).
-        fees:
-          $ref: '#/components/schemas/Fees'
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
           type: integer
-          description: HTTP status code.
+        tax_in_cents:
+          type: integer
+        tax_type:
+          type: string
+        total_in_cents:
+          type: integer
     FeeEntry:
       type: object
       properties:
@@ -229,6 +160,27 @@ components:
         fee_per_gift_in_cents:
           type: integer
           description: Per-gift fee in cents.
+    CampaignResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        status:
+          type: integer
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
     ErrorDetail:
       type: object
       properties:
@@ -241,7 +193,61 @@ components:
         message:
           type: string
           description: Context-specific error message.
+    Contact:
+      type: object
+      required:
+      - email
+      properties:
+        email:
+          type: string
+          format: email
+          description: Recipient email address.
+          example: pjohnson@giftbit.com
+        firstname:
+          type: string
+          description: Recipient first name.
+          example: Perry
+        lastname:
+          type: string
+          description: Recipient last name.
+          example: Johnson
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    Campaign:
+      type: object
+      properties:
+        uuid:
+          type: string
+          description: Giftbit-generated unique order identifier.
+        id:
+          type: string
+          description: Client-supplied order identifier.
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_code:
+          type: string
+          description: Brand code (single-brand orders).
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: Brand codes (multi-brand orders).
+        fees:
+          $ref: '#/components/schemas/Fees'
   responses:
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Authentication failed — invalid or missing bearer token.
       content:
@@ -250,12 +256,6 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: The request was valid but could not be processed.
       content:
         application/json:
           schema:
