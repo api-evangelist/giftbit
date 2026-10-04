@@ -68,6 +68,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
     Campaign:
       type: object
       properties:
@@ -90,6 +102,15 @@ components:
           description: Brand codes (multi-brand orders).
         fees:
           $ref: '#/components/schemas/Fees'
+    CampaignResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        status:
+          type: integer
     Fees:
       type: object
       properties:
@@ -105,54 +126,38 @@ components:
           type: string
         total_in_cents:
           type: integer
-    FeeEntry:
+    ErrorResponse:
       type: object
       properties:
-        percentage:
-          type: number
-          description: Fee as a percentage.
-        fee_type:
-          type: string
-          description: Type of fee (e.g. PREFUND_GIFT_COST, UPFRONT_PER_GIFT_FEE).
-        amount_in_cents:
-          type: integer
-          description: Total fee amount in cents.
-        currency:
-          type: string
-          description: Currency code.
-        tax_type:
-          type: string
-          description: Tax type (e.g. NOTAX).
-        tax_in_cents:
-          type: integer
-          description: Tax amount in cents.
-        number_of_gifts:
-          type: integer
-          description: Number of gifts this fee applies to.
-        fee_per_gift_in_cents:
-          type: integer
-          description: Per-gift fee in cents.
-    CampaignResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
         status:
           type: integer
-    InfoBlock:
+          description: HTTP status code.
+    ErrorDetail:
       type: object
       properties:
         code:
           type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+          description: Enum-style error code.
         name:
           type: string
-          description: Human-readable status name.
+          description: Human-readable error name.
         message:
           type: string
-          description: Context-specific status message.
+          description: Context-specific error message.
+    LinksResponse:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            type: string
+          description: Array of reward link URLs.
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
     CreateShortlinkOrderRequest:
       type: object
       required:
@@ -180,41 +185,36 @@ components:
         id:
           type: string
           description: Client-supplied unique order identifier.
-    ErrorDetail:
+    FeeEntry:
       type: object
       properties:
-        code:
+        percentage:
+          type: number
+          description: Fee as a percentage.
+        fee_type:
           type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
+          description: Type of fee (e.g. PREFUND_GIFT_COST, UPFRONT_PER_GIFT_FEE).
+        amount_in_cents:
           type: integer
-          description: HTTP status code.
-    LinksResponse:
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            type: string
-          description: Array of reward link URLs.
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
+          description: Total fee amount in cents.
+        currency:
+          type: string
+          description: Currency code.
+        tax_type:
+          type: string
+          description: Tax type (e.g. NOTAX).
+        tax_in_cents:
           type: integer
+          description: Tax amount in cents.
+        number_of_gifts:
+          type: integer
+          description: Number of gifts this fee applies to.
+        fee_per_gift_in_cents:
+          type: integer
+          description: Per-gift fee in cents.
   responses:
-    UnprocessableEntity:
-      description: The request was valid but could not be processed.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
@@ -225,8 +225,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
       content:
         application/json:
           schema:

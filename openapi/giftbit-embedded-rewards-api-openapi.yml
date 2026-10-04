@@ -47,48 +47,6 @@ paths:
           $ref: '#/components/responses/UnprocessableEntity'
 components:
   schemas:
-    FeeEntry:
-      type: object
-      properties:
-        percentage:
-          type: number
-          description: Fee as a percentage.
-        fee_type:
-          type: string
-          description: Type of fee (e.g. PREFUND_GIFT_COST, UPFRONT_PER_GIFT_FEE).
-        amount_in_cents:
-          type: integer
-          description: Total fee amount in cents.
-        currency:
-          type: string
-          description: Currency code.
-        tax_type:
-          type: string
-          description: Tax type (e.g. NOTAX).
-        tax_in_cents:
-          type: integer
-          description: Tax amount in cents.
-        number_of_gifts:
-          type: integer
-          description: Number of gifts this fee applies to.
-        fee_per_gift_in_cents:
-          type: integer
-          description: Per-gift fee in cents.
-    Fees:
-      type: object
-      properties:
-        cost_entries:
-          type: array
-          items:
-            $ref: '#/components/schemas/FeeEntry'
-        subtotal_in_cents:
-          type: integer
-        tax_in_cents:
-          type: integer
-        tax_type:
-          type: string
-        total_in_cents:
-          type: integer
     InfoBlock:
       type: object
       properties:
@@ -117,26 +75,6 @@ components:
         id:
           type: string
           description: Client-supplied unique order identifier.
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
     Campaign:
       type: object
       properties:
@@ -159,6 +97,41 @@ components:
           description: Brand codes (multi-brand orders).
         fees:
           $ref: '#/components/schemas/Fees'
+    Fees:
+      type: object
+      properties:
+        cost_entries:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeeEntry'
+        subtotal_in_cents:
+          type: integer
+        tax_in_cents:
+          type: integer
+        tax_type:
+          type: string
+        total_in_cents:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
     EmbeddedRewardResponse:
       type: object
       properties:
@@ -171,15 +144,42 @@ components:
           description: URL for embedding the reward in-app.
         status:
           type: integer
+    FeeEntry:
+      type: object
+      properties:
+        percentage:
+          type: number
+          description: Fee as a percentage.
+        fee_type:
+          type: string
+          description: Type of fee (e.g. PREFUND_GIFT_COST, UPFRONT_PER_GIFT_FEE).
+        amount_in_cents:
+          type: integer
+          description: Total fee amount in cents.
+        currency:
+          type: string
+          description: Currency code.
+        tax_type:
+          type: string
+          description: Tax type (e.g. NOTAX).
+        tax_in_cents:
+          type: integer
+          description: Tax amount in cents.
+        number_of_gifts:
+          type: integer
+          description: Number of gifts this fee applies to.
+        fee_per_gift_in_cents:
+          type: integer
+          description: Per-gift fee in cents.
   responses:
-    UnprocessableEntity:
-      description: The request was valid but could not be processed.
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Authentication failed — invalid or missing bearer token.
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
       content:
         application/json:
           schema:
