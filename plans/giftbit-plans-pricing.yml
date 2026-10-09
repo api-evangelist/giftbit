@@ -1,3 +1,7 @@
+# Provenance stamped 2026-10-07 (roadmap#943): written by an API Evangelist sweep (undated — the file carries no date and git cannot supply one), not
+# harvested from the provider. `method: generated` so the economics campaign may replace it with a
+# dated, verbatim transcription; every figure below is unverified until it does.
+method: generated
 name: Giftbit Plans and Pricing
 description: Pricing model for the Giftbit gift card and digital reward platform API.
 url: https://www.giftbit.com/pricing
@@ -43,3 +47,17 @@ notes: >
   is consumption-based on the face value of rewards distributed. Volume
   discounts and revenue sharing arrangements are available for qualifying
   high-volume programs.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  units: []
+  plans:
+  - name: Pay-As-You-Go
+    access: other
+    model: free
+    model_how: derived
+    units:
+    - other
+    periods: []
