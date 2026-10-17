@@ -68,6 +68,74 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    CreateShortlinkOrderRequest:
+      type: object
+      required:
+      - price_in_cents
+      - id
+      properties:
+        price_in_cents:
+          type: integer
+          description: Reward value in cents.
+        brand_codes:
+          type: array
+          items:
+            type: string
+          description: List of brand codes.
+        region:
+          type: string
+          description: Geographic region for full-catalog rewards.
+        link_count:
+          type: integer
+          description: Number of shortlink URLs to generate.
+        expiry:
+          type: string
+          format: date
+          description: Claim-before date (YYYY-MM-dd).
+        id:
+          type: string
+          description: Client-supplied unique order identifier.
+    CampaignResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        status:
+          type: integer
+    LinksResponse:
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            type: string
+          description: Array of reward link URLs.
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        status:
+          type: integer
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
     InfoBlock:
       type: object
       properties:
@@ -102,15 +170,6 @@ components:
           description: Brand codes (multi-brand orders).
         fees:
           $ref: '#/components/schemas/Fees'
-    CampaignResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        status:
-          type: integer
     Fees:
       type: object
       properties:
@@ -126,65 +185,6 @@ components:
           type: string
         total_in_cents:
           type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-    LinksResponse:
-      type: object
-      properties:
-        links:
-          type: array
-          items:
-            type: string
-          description: Array of reward link URLs.
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        status:
-          type: integer
-    CreateShortlinkOrderRequest:
-      type: object
-      required:
-      - price_in_cents
-      - id
-      properties:
-        price_in_cents:
-          type: integer
-          description: Reward value in cents.
-        brand_codes:
-          type: array
-          items:
-            type: string
-          description: List of brand codes.
-        region:
-          type: string
-          description: Geographic region for full-catalog rewards.
-        link_count:
-          type: integer
-          description: Number of shortlink URLs to generate.
-        expiry:
-          type: string
-          format: date
-          description: Claim-before date (YYYY-MM-dd).
-        id:
-          type: string
-          description: Client-supplied unique order identifier.
     FeeEntry:
       type: object
       properties:
@@ -213,8 +213,8 @@ components:
           type: integer
           description: Per-gift fee in cents.
   responses:
-    NotFound:
-      description: The requested resource was not found.
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
       content:
         application/json:
           schema:
@@ -225,8 +225,8 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: The request was valid but could not be processed.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:

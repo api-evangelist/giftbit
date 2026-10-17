@@ -63,86 +63,6 @@ paths:
         '402':
           $ref: '#/components/responses/PaymentRequired'
 components:
-  schemas:
-    InfoBlock:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
-        name:
-          type: string
-          description: Human-readable status name.
-        message:
-          type: string
-          description: Context-specific status message.
-    AddFundsRequest:
-      type: object
-      required:
-      - currencyisocode
-      - fund_amount_in_cents
-      - id
-      properties:
-        currencyisocode:
-          type: string
-          description: Currency to add funds in. Options CAD or USD.
-          enum:
-          - CAD
-          - USD
-        fund_amount_in_cents:
-          type: integer
-          description: Amount to fund in cents. Subject to minimums set in the web app.
-        id:
-          type: string
-          description: Client-supplied unique funding event identifier.
-    ErrorResponse:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorDetail'
-        status:
-          type: integer
-          description: HTTP status code.
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-    CurrencyBalance:
-      type: object
-      properties:
-        available_in_cents:
-          type: integer
-          description: Available purchasing power in cents.
-        pending_in_cents:
-          type: integer
-          description: Funds sent but not yet fully processed.
-        reserved_in_cents:
-          type: integer
-          description: Funds held to cover outstanding unredeemed reward offers.
-    FundsResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        fundsbycurrency:
-          type: object
-          properties:
-            USD:
-              $ref: '#/components/schemas/CurrencyBalance'
-            CAD:
-              $ref: '#/components/schemas/CurrencyBalance'
-            PRO:
-              $ref: '#/components/schemas/CurrencyBalance'
-        status:
-          type: integer
   responses:
     Unauthorized:
       description: Authentication failed — invalid or missing bearer token.
@@ -162,6 +82,86 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorDetail:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Enum-style error code.
+        name:
+          type: string
+          description: Human-readable error name.
+        message:
+          type: string
+          description: Context-specific error message.
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorDetail'
+        status:
+          type: integer
+          description: HTTP status code.
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
+    FundsResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        fundsbycurrency:
+          type: object
+          properties:
+            USD:
+              $ref: '#/components/schemas/CurrencyBalance'
+            CAD:
+              $ref: '#/components/schemas/CurrencyBalance'
+            PRO:
+              $ref: '#/components/schemas/CurrencyBalance'
+        status:
+          type: integer
+    CurrencyBalance:
+      type: object
+      properties:
+        available_in_cents:
+          type: integer
+          description: Available purchasing power in cents.
+        pending_in_cents:
+          type: integer
+          description: Funds sent but not yet fully processed.
+        reserved_in_cents:
+          type: integer
+          description: Funds held to cover outstanding unredeemed reward offers.
+    AddFundsRequest:
+      type: object
+      required:
+      - currencyisocode
+      - fund_amount_in_cents
+      - id
+      properties:
+        currencyisocode:
+          type: string
+          description: Currency to add funds in. Options CAD or USD.
+          enum:
+          - CAD
+          - USD
+        fund_amount_in_cents:
+          type: integer
+          description: Amount to fund in cents. Subject to minimums set in the web app.
+        id:
+          type: string
+          description: Client-supplied unique funding event identifier.
   securitySchemes:
     BearerAuth:
       type: http

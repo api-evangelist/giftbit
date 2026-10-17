@@ -46,35 +46,32 @@ paths:
         '422':
           $ref: '#/components/responses/UnprocessableEntity'
 components:
+  responses:
+    Unauthorized:
+      description: Authentication failed — invalid or missing bearer token.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    UnprocessableEntity:
+      description: The request was valid but could not be processed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    InfoBlock:
+    ErrorDetail:
       type: object
       properties:
         code:
           type: string
-          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+          description: Enum-style error code.
         name:
           type: string
-          description: Human-readable status name.
+          description: Human-readable error name.
         message:
           type: string
-          description: Context-specific status message.
-    CreateEmbeddedRewardRequest:
-      type: object
-      required:
-      - price_in_cents
-      - brand_code
-      - id
-      properties:
-        price_in_cents:
-          type: integer
-          description: Reward value in cents (e.g. 2500 = $25.00).
-        brand_code:
-          type: string
-          description: Single brand code for the embedded reward.
-        id:
-          type: string
-          description: Client-supplied unique order identifier.
+          description: Context-specific error message.
     Campaign:
       type: object
       properties:
@@ -97,6 +94,18 @@ components:
           description: Brand codes (multi-brand orders).
         fees:
           $ref: '#/components/schemas/Fees'
+    InfoBlock:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Status code (e.g. INFO_CAMPAIGN_CREATED).
+        name:
+          type: string
+          description: Human-readable status name.
+        message:
+          type: string
+          description: Context-specific status message.
     Fees:
       type: object
       properties:
@@ -120,30 +129,6 @@ components:
         status:
           type: integer
           description: HTTP status code.
-    ErrorDetail:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Enum-style error code.
-        name:
-          type: string
-          description: Human-readable error name.
-        message:
-          type: string
-          description: Context-specific error message.
-    EmbeddedRewardResponse:
-      type: object
-      properties:
-        info:
-          $ref: '#/components/schemas/InfoBlock'
-        campaign:
-          $ref: '#/components/schemas/Campaign'
-        gift_link:
-          type: string
-          description: URL for embedding the reward in-app.
-        status:
-          type: integer
     FeeEntry:
       type: object
       properties:
@@ -171,19 +156,34 @@ components:
         fee_per_gift_in_cents:
           type: integer
           description: Per-gift fee in cents.
-  responses:
-    Unauthorized:
-      description: Authentication failed — invalid or missing bearer token.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    UnprocessableEntity:
-      description: The request was valid but could not be processed.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    CreateEmbeddedRewardRequest:
+      type: object
+      required:
+      - price_in_cents
+      - brand_code
+      - id
+      properties:
+        price_in_cents:
+          type: integer
+          description: Reward value in cents (e.g. 2500 = $25.00).
+        brand_code:
+          type: string
+          description: Single brand code for the embedded reward.
+        id:
+          type: string
+          description: Client-supplied unique order identifier.
+    EmbeddedRewardResponse:
+      type: object
+      properties:
+        info:
+          $ref: '#/components/schemas/InfoBlock'
+        campaign:
+          $ref: '#/components/schemas/Campaign'
+        gift_link:
+          type: string
+          description: URL for embedding the reward in-app.
+        status:
+          type: integer
   securitySchemes:
     BearerAuth:
       type: http
