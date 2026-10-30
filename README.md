@@ -1,4 +1,4 @@
-# Giftbit (giftbit)
+# Giftbit
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,59 +66,169 @@
 
 Giftbit is a gift card and digital reward platform with a REST API for distributing digital gift cards, managing reward campaigns, tracking redemptions, and accessing a marketplace of 1,500+ brand integrations across 40+ countries. The API enables businesses to send single-brand or multi-brand rewards via email delivery, shortlinks, direct links, or in-app embeds, with no platform subscription fees — paying only the face value of rewards sent.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/apis.yml)
+**Areas:** Gift Cards · Digital Rewards · Incentives · Payments · Reward Distribution · Prepaid Cards · Loyalty · Loyalty & Incentives
 
-## Tags
+## Giftbit on APIs.io
 
-- Gift Cards
-- Digital Rewards
-- Incentives
-- Payments
-- Reward Distribution
-- Prepaid Cards
+Everything profiled for Giftbit is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/giftbit/](https://apis.io/providers/giftbit/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (9)
 
-- **Created:** 2026-06-13
-- **Modified:** 2026-06-13
+- [Giftbit Brands API](https://apis.io/apis/giftbit/giftbit-brands-api/) — Browse available reward brands and catalogs
+- [Giftbit Campaigns API](https://apis.io/apis/giftbit/giftbit-campaigns-api/) — Create and manage email reward orders
+- [Giftbit Direct Links API](https://apis.io/apis/giftbit/giftbit-direct-links-api/) — Create direct link reward orders
+- [Giftbit Embedded Rewards API](https://apis.io/apis/giftbit/giftbit-embedded-rewards-api/) — Create in-app embedded reward orders
+- [Giftbit Funds API](https://apis.io/apis/giftbit/giftbit-funds-api/) — Manage account balance and credit card funding
+- [Giftbit Ping API](https://apis.io/apis/giftbit/giftbit-ping-api/) — Health check and authentication test
+- [Giftbit Regions API](https://apis.io/apis/giftbit/giftbit-regions-api/) — List supported geographical regions
+- [Giftbit Rewards API](https://apis.io/apis/giftbit/giftbit-rewards-api/) — List, retrieve, resend, or cancel individual rewards
+- [Giftbit Short Links API](https://apis.io/apis/giftbit/giftbit-short-links-api/) — Create shortlink reward orders
 
-## APIs
+### Published properties
 
-### Giftbit API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-RESTful API for distributing digital gift cards and prepaid cards, managing reward campaigns, retrieving brand catalogs, and tracking individual gift redemption status. Supports email delivery, shortlinks, direct links, and in-app embedded reward flows.
+#### Agentic access (1)
 
-- **Human URL:** [https://www.giftbit.com/gift-card-api](https://www.giftbit.com/gift-card-api)
-- **Base URL:** `https://api.giftbit.com/papi/v1`
+Which operations an agent can call, which act, and which need a human in the loop.
 
-#### Tags
+- [Giftbit Agentic Access](https://apis.io/agentic-access/giftbit/giftbit-agentic-access/)
 
-- Gift Cards
-- Rewards
-- Campaigns
-- Redemptions
+#### JSON Schema (3)
 
-#### Properties
+The data models the API reads and writes.
 
-- [Documentation](https://www.giftbit.com/giftbitapi/)
-- [OpenAPI](https://raw.githubusercontent.com/api-evangelist/giftbit/refs/heads/main/openapi/giftbit-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Sandbox](https://testbed.giftbit.com)
+- [Campaign](https://apis.io/schemas/giftbit/campaign/)
+- [Contact](https://apis.io/schemas/giftbit/contact/)
+- [Reward](https://apis.io/schemas/giftbit/reward/)
 
-## Common Properties
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Giftbit Context](https://apis.io/jsonld/giftbit/giftbit-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Giftbit API Vocabulary](https://apis.io/vocabularies/giftbit/giftbit-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Create Email Order](https://apis.io/examples/giftbit/create-email-order/)
+- [Create Embedded Reward](https://apis.io/examples/giftbit/create-embedded-reward/)
+- [Funds Response](https://apis.io/examples/giftbit/funds-response/)
+- [Reward Response](https://apis.io/examples/giftbit/reward-response/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [Giftbit Brands API](https://apis.io/collections/giftbit/open-giftbit-brands-api/)
+- [Giftbit Brands Campaigns API](https://apis.io/collections/giftbit/open-giftbit-campaigns-api/)
+- [Giftbit Brands Direct Links API](https://apis.io/collections/giftbit/open-giftbit-direct-links-api/)
+- [Giftbit Brands Embedded Rewards API](https://apis.io/collections/giftbit/open-giftbit-embedded-rewards-api/)
+- [Giftbit Brands Funds API](https://apis.io/collections/giftbit/open-giftbit-funds-api/)
+- [Giftbit Brands Ping API](https://apis.io/collections/giftbit/open-giftbit-ping-api/)
+- [Giftbit Brands Regions API](https://apis.io/collections/giftbit/open-giftbit-regions-api/)
+- [Giftbit Brands Rewards API](https://apis.io/collections/giftbit/open-giftbit-rewards-api/)
+- [Giftbit Brands Shortlinks API](https://apis.io/collections/giftbit/open-giftbit-shortlinks-api/)
+
+#### Governance rules (1)
+
+Spectral rulesets for the provider's contracts.
+
+- [Giftbit — jsonschema rules](https://apis.io/rules/giftbit/giftbit-jsonschema-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Giftbit Authentication](https://apis.io/security/giftbit/giftbit-authentication/)
+- [Giftbit Domain Security](https://apis.io/security/giftbit/giftbit-domain-security/)
+- [Giftbit Trust Center](https://apis.io/security/giftbit/giftbit-trust-center/)
+- [Giftbit Vulnerability Disclosure](https://apis.io/security/giftbit/giftbit-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Giftbit Plans Pricing](https://apis.io/plans/giftbit/giftbit-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Giftbit Rate Limits](https://apis.io/rate-limits/giftbit/giftbit-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Giftbit Finops](https://apis.io/finops/giftbit/giftbit-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.giftbit.com)
 - [Documentation](https://www.giftbit.com/api-documentation)
-- [Git Hub Org](https://github.com/Giftbit)
-- [LinkedIn](https://www.linkedin.com/company/giftbit)
-- [Blog](https://www.giftbit.com/blog)
 - [Pricing](https://www.giftbit.com/pricing)
-- [Status Page](https://status.giftbit.com/)
-- [X (Twitter)](https://x.com/giftbit)
-- [Plans](plans/giftbit-plans-pricing.yml)
-- [Rate Limits](rate-limits/giftbit-rate-limits.yml)
-- [Fin Ops](finops/giftbit-finops.yml)
+- [Blog](https://www.giftbit.com/blog)
+- [Status](https://status.giftbit.com/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 36.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 59.7 |
+| Contract governance | 9.8 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 23.7 |
+
+**Agent readiness 22.1** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 25.0** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/giftbit/](https://apis.io/providers/giftbit/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Giftbit: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/giftbit/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
